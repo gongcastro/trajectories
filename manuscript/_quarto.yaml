@@ -1,71 +1,28 @@
-project:
-  render:
-    - manuscript.qmd
-
 format:
-  arxiv-pdf:
-    keep-tex: true  
-    linenumbers: true
-    doublespacing: false
-    runninghead: "Cognate beginnings to bilingual lexical acquistion"
-    include-in-header: 
-      text: |
-        \usepackage{tipa}
-        \usepackage{booktabs}
-    knitr:
-      opts_chunk:
-        dev: "cairo_pdf"
-    filters: 
-      - "_extensions/andrewheiss/wordcount/citeproc.lua"
-      - "_extensions/andrewheiss/wordcount/wordcount.lua"
-
-title: "Cognate beginnings to bilingual lexical acquisition"
-short-title: "Cognate beginnings"
-author:
-  - name: Gonzalo Garcia-Castro
-    corresponding: true
-    orcid: 0000-0002-8553-4209
-    email: gonzalo.garciadecastro@upf.edu
-    affiliations:
-      - id: cbc
-        name: Universitat Pompeu Fabra
-        department: Center for Brain and Cognition
-        city: Barcelona, 08005
-  - name: Daniela S. Avila-Varela
-    orcid: 0000-0002-3518-8117
-    email: daniela.avila@upf.edu
-    affiliations: 
-      - ref: cbc
-      - id: ul
-        name: Universidade de Lisboa
-        department: Linguistics Center (CLUL), School of Arts and Humanities
-        city: Lisbon, 1600-214
-  - name: Ignacio Castillejo
-    orcid: 0000-0001-7445-0416
-    email: jignaciocastillejo@gmail.com
-    affiliations: 
-      - id: uam 
-        name: Universidad Autónoma de Madrid
-        department: Departamento de Psicología
-        city: Madrid, 28049
-  - name: Nuria Sebastian-Galles
-    orcid: 0000-0001-6938-2498
-    email: nuria.sebastian@upf.edu
-    affiliations: 
-      - ref: cbc
-keywords:
-  - cognate
-  - word acquisition
-  - vocabulary
-  - bilingualism
-  - item response theory
-  - bayesian
-csl: "_assets/apa7.csl"
-bibliography: "_assets/references.bib"
-link-citations: true
+  docx:
+    reference-doc: _assets/template.docx
+crossref:
+  custom:
+    - key: sfig
+      kind: float
+      reference-prefix: Figure SI
+      space-before-numbering: false
+    - key: stbl
+      kind: float
+      reference-prefix: Table SI
+      space-before-numbering: false
 editor: source
 lang: en
 freeze: true
+echo: false
+warning: false
+message: false
+prefer-html: true
 fig-dpi: 1000
-
-
+fig-align: center
+linkcolor: black
+link-citations: false
+link-bibliography: false
+always_allow_html: 'yes'
+csl: _assets/apa7.csl
+bibliography: _assets/references.bib

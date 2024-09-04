@@ -1,0 +1,5 @@
+This folder contains the raw data and R scripts used to fetch the raw data:
+
+- The `bvq.R` script uses the bvq R package to download the questionnaire responses along information about participants, questionnaire items, and questionnaire response logs. The output of this script is the `bvq.rds` file, which contains an R object that will be loaded by the main targets workflow.
+- The `sex.csv` file contains information about participants' sex that is added to the `bvq.rds` file within the `bvq.R` script. This information was extracted separately from the UPF Babylab database because early versions of the BVQ questionnaire did not include this item.
+- The [PHOR_in_One_LDB.xlsx](PHOR_in_One_LDB.xlsx) file contains the [PHOR-in-One database](https://link.springer.com/article/10.3758/s13428-022-01985-3), which provides lexical frequencies of an extensive list of translation equivalents across several pairs of languages. This database was used in the Supplementary Information.  

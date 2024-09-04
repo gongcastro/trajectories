@@ -1,11 +1,11 @@
 all: targets docker
 
-targets: _targets.R
-	@echo "Running targets..."
+targets: _targets.R src/helpers.R
+	@echo Running targets...
 	@Rscript -e "targets::tar_make()"
-	@echo "Cleaning repository..."
+	@echo Cleaning repository...
 	@Rscript -e "source('src/helpers.R'); clean_repo()"
-	@echo "Rendering website..."
+	@echo Rendering website...
 	@quarto publish gh-pages
 
 delete-nul:

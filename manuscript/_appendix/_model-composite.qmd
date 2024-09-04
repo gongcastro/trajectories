@@ -1,0 +1,143 @@
+We developed the *Exposure* predictor to account for the fact that bilinguals' exposure to a given word-form is not only a function of the word-form's lexical frequency, but also of the quantitative input they receive from the language such word-form belongs to. We expressed lexical frequencies as the product between both variables. As in the main model, we first extracted the child-directed lexical frequency of each word-form from the English corpora of the CHILDES database [@macwhinney2000childes], and mapped them into their Catalan and Spanish translation equivalents. We then transformed the resulting lexical frequencies into Zipf scores. To obtain the new composite measure, which we term the language-exposure weighted lexical frequency (LEWF), we multiplied the resulting lexical frequencies by the child's degree of exposure (DoE) to Catalan or Spanish (whichever language the word-form belongs to) (see Equation 1).
+
+![](_assets/img/eq-3.png)
+
+
+For instance, for a child whose degree of exposure is 80% for Catalan and 20% for Spanish, the expected *Exposure* score to the Catalan word-form *cotxe* [*car*]---with a lexical frequency of `r round(items$freq[items$item=="cotxe"], 2)`---would be `r round(items$freq[items$item=="cotxe"]*0.80, 2)`, while that of its translation to Spanish *coche* would be `r round(items$freq[items$item=="coche"]*0.20, 2)`.
+
+@sfig-coefs-composite shows the posterior distribution of the fixed regression coefficients of the model that included *LEWF* as a fixed effect, in interaction with *Age* and *Cognateness*, and which did not include *Frequency* as a co-variate (as this variable is now included in the *LEWF* predictor). Overall, results are equivalent, indicating that *LEWF* might be a useful estimate of lexical frequency in bilinguals.
+
+::: {#sfig-coefs-composite}
+
+```{r}
+#| label: sfig-coefs-composite
+#| fig-cap: "Posterior distribution of fixed regression coefficients. Values have been transformed to the probability scale for interpretability. (A) Posterior distribution of intercepts for *Comprehension* and for *Comprehension and Production*. The X-axis shows the estimated average probability of acquisition when all predictors are set at zero. The grey rectangle shows the region of practical equivalence (ROPE, [-0.025, +0.025]). (B) Posterior distribution of slopes. The X-axis shows the estimated average change in probability of acquisition associated with a change of one standard deviation in the predictor, when the other predictors are set at zero."
+#| echo: false
+#| message: false
+#| warning: false
+#| out-width: 100%
+#| fig-width: 7
+#| fig-height: 7
+# summarise posterior draws
+intercept_label <- glue::glue("Intercepts (at average{round(mean(responses$age), 2)} months)")
+
+source(here::here("R", "utils.R"))
+model_vars_dict_composite <- get_vars_dict(responses)
+
+sum_data <- model_summary_composite |>
+  mutate(
+    across(
+      .value:.upper,
+      \(x) ifelse(.type == intercept_label, plogis(x), x / 4)
+    ),
+    .variable_name = factor(.variable_name,
+      #levels = unique(model_vars_dict_composite),
+      ordered = TRUE
+    ),
+    .variable_name = gsub(
+      "Comprehension and Production", "Production",
+      .variable_name
+    )
+  )
+
+
+draws_data <- model_draws_composite |>
+  mutate(
+    across(
+      .value,
+      \(x) ifelse(.type == intercept_label, plogis(x), x / 4)
+    ),
+    .variable_name = factor(.variable_name,
+      #levels = unique(model_vars_dict),
+      ordered = TRUE
+    )
+  )
+
+int_plot <- draws_data |>
+    mutate(.variable_name = gsub("Comprehension and Production", "Production",
+                                 .variable_name)) |> 
+    filter(.type!="Slopes") |> 
+    ggplot(aes(.value, reorder(.variable_name, desc(.variable_name)))) +
+    facet_wrap(vars(.type), ncol = 1, scales = "free") +
+    stat_slab(fill = clrs[4]) +
+    geom_errorbar(data = filter(sum_data, .type!="Slopes"),
+                  aes(xmin = .lower, xmax = .upper),
+                  width = 0.2, position = position_nudge(y = -0.2)) + 
+    geom_point(data = filter(sum_data, .type!="Slopes"), 
+               position = position_nudge(y = -0.2),
+               size = 1.5) +
+    labs(x = "Acquisition probability",
+         y = "Predictor") +
+    theme(panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          axis.title.y = element_blank()) 
+
+slopes_plot <- draws_data |> 
+    filter(.type=="Slopes") |> 
+    ggplot(aes(.value, reorder(.variable_name, .variable_name),
+               fill = after_stat(abs(x) < rope_interval["upper"]))) +
+    facet_wrap(vars(.type), ncol = 1, scales = "free") +
+  annotate(
+    geom = "rect",
+    colour = NA,
+    fill = "grey",
+    alpha = 1 / 4,
+    ymin = 0,
+    ymax = 10,
+    xmin = rope_interval["lower"],
+    xmax = rope_interval["upper"]
+  ) +
+  annotate(
+    geom = "text",
+    label = "ROPE",
+    colour = "grey",
+    angle = 90,
+    x = rope_interval["upper"],
+    y = 10,
+    size = 3,
+    hjust = 1.1,
+    vjust = 1.5
+  ) +
+    geom_vline(xintercept = 0,
+               colour = "grey") +
+    stat_slab() +
+    geom_errorbar(data = filter(sum_data, .type=="Slopes"),
+                  aes(xmin = .lower, xmax = .upper),
+                  width = 0.2, position = position_nudge(y = -0.2)) +
+    geom_point(data = filter(sum_data, .type=="Slopes"),
+               position = position_nudge(y = -0.2),
+               size = 1.5, show.legend = FALSE) +
+    scale_fill_manual(values = c(clrs[4], "grey60"),
+                      labels = rev(c("Inside ROPE",
+                                 "Outside ROPE"))) +  
+                                   scale_y_discrete(limits = rev) +
+    labs(x = "Change in acquisition probability",
+         y = "Predictor",
+         fill = "Inside ROPE") +
+    theme(legend.position = c(1, 0),
+          legend.justification = c(1, 0),
+          legend.text.align = 1,
+          legend.title.align = 0)
+
+
+int_plot / slopes_plot +
+    plot_layout(heights = c(0.2, 0.8)) &
+    plot_annotation(tag_levels = "A") &
+    #scale_x_continuous(limits = c(-0.2, 1)) &
+    theme(panel.grid.major.y = element_blank(),
+          panel.grid.minor.y = element_blank(),
+          panel.grid.minor.x = element_blank(),
+          # axis.text.y = element_text(angle = 30),
+          axis.title.y = element_blank(),
+          strip.text = element_text(size = 12)) 
+
+
+suppressMessages({
+    invisible({
+        devices <- c("png", "pdf", "svg", "tiff", "eps")
+        paths <- paste("_assets/img/Figure_7_SuppInfo", devices, sep = ".")
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 18, height = 18, units = "cm"))
+    })
+})
+```
+:::

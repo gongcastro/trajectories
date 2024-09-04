@@ -28,8 +28,7 @@ get_participants <- function(bvq_data,
             between(doe_others, 0, 1)
         ) |> 
         mutate(time = as.integer(time)) |> 
-        # see ?bvq::get_longitudinal
-        bvq::get_longitudinal(longitudinal = longitudinal) |> 
+        get_longitudinal(longitudinal = longitudinal) |> 
         select(id, time, time_stamp = date_finished, list = version,
                age, sex, lp, doe_catalan, doe_spanish, edu_parent) |> 
         arrange(id)

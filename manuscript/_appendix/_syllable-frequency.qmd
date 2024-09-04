@@ -27,8 +27,8 @@ pool_tmp <- bvq_data$pool |>
            item = gsub("cat_|spa_", "", item)) 
 
 items <- items |> 
-    mutate(xsampa = ipa::ipa(ipa),
-           syll = strsplit(xsampa, 
+    mutate(xsampa = ipa::ipa(ipa)) |> 
+    mutate(syll = strsplit(xsampa, 
                            split = paste0(.sep = c("\\.", "\\\""), 
                                           collapse = "|")),
            syll = lapply(syll, function(x) x[x != ""]),
@@ -36,11 +36,13 @@ items <- items |>
            item = gsub("cat_|spa_", "", item)) 
 ```
 
-We define syllable frequency as the rate of appearance of individual syllables in the word-forms included in the Barcelona Vocabulary Questionnaire (BVQ) [@garcia-castro2023bvq]. Each item corresponds to a Catalan or Spanish word, and has an associated phonological transcription in X-SAMPA format [@wells1995computercoding]. These transcriptions are syllabified. Some examples:
+We define syllable frequency as the rate of appearance of individual syllables in the word-forms included in the [QUESTIONNAIRE NAME REDACTED FOR BLIND REVIEW] [REFERENCE REDACTED FOR BLIND REVIEW]. Each item corresponds to a Catalan or Spanish word, and has an associated phonological transcription in X-SAMPA format [@wells1995computercoding]. These transcriptions are syllabified. Some examples:
 
-```{r tbl-items-table}
-#| label: tbl-syll-items
-#| tbl-cap: Sample of items included in the BVQ questionnaire and their syllabified SAMPA transcriptions in Catalan and Spanish.
+::: {#stbl-items-table}
+
+```{r}
+#| label: stbl-syll-items
+#| tbl-cap: Sample of items included in the BVQ questionnaire and their syllabified SAMPA transcriptions in Catalan and Spanish
 #| echo: false
 #| warning: false
 #| message: false
@@ -60,19 +62,29 @@ tbl_data <- items |>
 col_names <- c("Translation", "Item", "X-SAMPA", "Syllables",
                "Item", "X-SAMPA", "Syllables")
 
-tbl_data |> 
-    kable(digits = 3,
-          format = "latex",
-          booktabs = TRUE,
-          col.names = col_names, 
-          align = "lllcllc") 
+colnames(tbl_data) <- col_names
+
+tt(tbl_data) |> 
+    style_tt(i = c(1, nrow(tbl_data)), j = 1, align = "l") |> 
+    style_tt(
+        i = 0,
+        j = 1:ncol(tbl_data),
+        line = "tb",
+        line_width = 0.1) |> 
+    style_tt(
+        i = nrow(tbl_data),
+        j = 1:ncol(tbl_data),
+        line = "b",
+        line_width = 0.1)
 ```
+:::
 
+Most Catalan and Spanish words had two syllables, with Spanish words having three and four syllables more often than Catalan words. Less than 1% of the words included in the analyses presented in the main body of the manuscripts had five syllables. No words had more than five syllables (see @sfig-syll-number). We extracted lexical frequencies from the English corpora in the CHILDES database [@macwhinney2000childes; @sanchez2019childesdb]. Using the Catalan and Spanish corpora was not possible due to the low number of children and tokens included in the corpora.
 
-Most Catalan and Spanish words had two syllables, with Spanish words having three and four syllables more often than Catalan words. Less than 1% of the words included in the analyses presented in the main body of the manuscripts had five syllables. No words had more than five syllables (see @fig-syll-number). We extracted lexical frequencies from the English corpora in the CHILDES database [@macwhinney2000childes; @sanchez2019childesdb]. Using the Catalan and Spanish corpora was not possible due to the low number of children and tokens included in the corpora.
+::: {#sfig-syll-number}
 
-```{r fig-syll-number}
-#| label: fig-syll-number
+```{r}
+#| label: sfig-syll-number
 #| fig-cap: Distribution of the number of syllables in Catalan and Spanish
 #| fig-width: 7
 #| fig-height: 3
@@ -87,7 +99,7 @@ pool_tmp |>
     mutate(prop = n/n_lang) |> 
     ggplot(aes(n_syll, n)) +
     facet_wrap(~ language) +
-    geom_col(colour = "white", fill = "black") +
+    geom_col(colour = "white", fill = "grey") +
     geom_text(aes(label = scales::percent(prop)),
               size = 3,
               position = position_nudge(y = 15),
@@ -97,19 +109,31 @@ pool_tmp |>
          fill = "Language") +
     theme(legend.position = "none",
           panel.grid = element_blank())
+
+suppressMessages({
+    invisible({
+        devices <- c("png", "pdf", "svg", "tiff", "eps")
+        paths <- paste("_assets/img/Figure_4_SuppInfo", devices, sep = ".")
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 18, height = 12, units = "cm"))
+    })
+})
 ```
+:::
 
+We now present how syllable frequencies were calculated. Every exposure to a word-form also counts as an exposure to each of the syllables that make up such word. Every time a child hears the word *casa* [house], they are exposed to the syllables *ca* and *sa*. Syllables that appear embedded in words with higher lexical frequency will also be more frequent. To compute the relative frequency of each syllable in Catalan and Spanish (i.e., how many times the syllables appears in every million words in Catalan or Spanish speech), we summed the relative lexical frequency in CHILDES of every word that contains such syllable in the corresponding language. @sfig-syll-freq shows the distribution of frequencies across syllables in Catalan and Spanish. In the log10 scale, syllable frequencies in Catalan and Spanish followed a slightly asymmetric distribution, with most syllables scoring around 1,000 counts per million, and a longer tail to the right of the distribution.
 
-We now present how syllable frequencies were calculated. Every exposure to a word-form also counts as a exposure to each of the syllables that make up such word. Every time a child hears the word *casa* [house], they are exposed to the syllables *ca* and *sa*. Syllables that appear embedded in words with higher lexical frequency will also be more frequent. To compute the relative frequency of each syllable in Catalan and Spanish (i.e., how many times the syllables appears in every million words in Catalan or Spanish speech), we summed the relative lexical frequency in CHILDES of every word that contains such syllable in the corresponding language. @fig-syll-freq shows the distribution of frequencies across syllables in Catalan and Spanish. In the log10 scale, syllable frequencies in Catalan and Spanish followed a slightly asymmetric distribution, with most syllables scoring around 1,000 counts per million, and a longer tail to the right of the distribution.
+::: {#sfig-syll-freq}
 
-```{r fig-syll-freq}
-#| label: fig-syll-freq
+```{r}
+#| label: sfig-syll-freq
 #| fig-cap: "Distribution of apositional syllable frequencies in Spanish and Catalan"
 #| fig-height: 3.5
 #| fig-width: 7
 #| echo: false
 #| warning: false
 #| message: false
+tar_load(childes)
+
 syll <- items |> 
     left_join(distinct(pool_tmp, te, childes_lemma),
               by = join_by(te)) |> 
@@ -128,7 +152,7 @@ syll |>
     facet_wrap(~language) +
     geom_histogram(colour = "white",
                    bins = 20,
-                   fill = "black",
+                   fill = "grey",
                    position = position_nudge(y = 0.1)) +
     geom_rug(alpha = 1/10) +
     labs(x = "Relative frequency (counts per million)",
@@ -140,30 +164,20 @@ syll |>
     theme(legend.title = element_blank(),
           panel.grid = element_blank(),
           legend.position = "none")
+
+suppressMessages({
+    invisible({
+        devices <- c("png", "pdf", "svg", "tiff", "eps")
+        paths <- paste("_assets/img/Figure_5_SuppInfo", devices, sep = ".")
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 18, height = 10, units = "cm"))
+    })
+})
 ```
+:::
 
-To estimate the association between word-level syllabic frequency and cognateness, while controlling for the number of syllables in the word, (an increment in the number of syllables necessarily increases the summed syllabic frequency of the word), we fit a multilevel, Bayesian linear regression model with syllabic frequency (the sum of the syllabic frequency of the syllables in a word) as response variable, and the main effect of the number of syllables ($Syllables$) and $Cognateness$ [Levenshtein similarity between a word and its translation equivalent, @levenshtein1966binary] as predictors. We added translation equivalent-level random effects for the intercept and the main effect of $Syllables$ (some translation pairs had a different number of syllables in each language). We used a Gaussian distribution to model syllabic frequency scores after standardising this variable and the predictors. We used a weakly informative prior for all parameters involved in the model (see @eq-model-syllables for a formal equation of this model and its prior). We conducted statistical inference by evaluating the proportion of the 95% highest density interval (HDI) of the posterior posterior distribution of each coefficient that fell into the region of practical equivalence [ROPE, see the main manuscript for a more detailed explanation, @kruschke2018bayesian].
+To estimate the association between word-level syllabic frequency and cognateness, while controlling for the number of syllables in the word, as words are expected to necessarily increase the syllabic frequency of the word, we fit a multilevel, Bayesian linear regression model with syllabic frequency (the sum of the syllabic frequency of the syllables in a word) as response variable, and the main effect of the number of syllables (*Syllables*) and *Cognateness* [Levenshtein similarity between a word and its translation equivalent, @levenshtein1966binary] as predictors. We added translation equivalent-level random effects for the intercept and the main effect of *Syllables* (some translation pairs had a different number of syllables in each language). We used a Gaussian distribution to model syllabic frequency scores after standardising this variable and the predictors. We used a weakly informative prior for all parameters involved in the model (see Equation 2 for a formal equation of this model and its prior). We conducted statistical inference by evaluating the proportion of the 95% highest density interval (HDI) of the posterior posterior distribution of each coefficient that fell into the region of practical equivalence [ROPE, see the main manuscript for a more detailed explanation, @kruschke2018bayesian].
 
-$$
-\begin{aligned}
-\text{Syllable frequency} &\sim \mathcal{N}(\mu, \sigma)\\
-\mu &= (\beta_0 + u_{0_{i}}) + (\beta_1 + u_{1_{i}}) \text{Syllables} + \beta_2 \text{Cognateness} \\
-\beta_{0-3} &\sim \mathcal{N}(0, 10) \\
-u_{{0-1}_{i}} &\sim \mathcal{N}(0, \sigma_{u_i}) \\
-\sigma_y & \sim \text{Exponential}(2)\\
-\Big(\begin{smallmatrix}
-u_{0_{i}} \\ 
-u_{1_{i}} \\ 
-\end{smallmatrix}\Big) &\sim \mathcal{N} 
-\Big(\Big(\begin{smallmatrix}0 \\
-0\end{smallmatrix}\Big), \Sigma_{u}\Big) \\
-\Sigma_{u} &= \Big(\begin{smallmatrix} \\
-\sigma_{u_{0}} & \rho_{u_{0}} \sigma_{u_{0}} \sigma_{u_{1}} \\ 
-\rho_{u_{1}} \sigma_{u_{1}} \sigma_{u_{0}} & \sigma_{u_{1}} \end{smallmatrix}\Big) \\
-\sigma_{u_{0-1}} &\sim \mathcal{N_{+}}(1, 0.1) \\
-\rho_{u} &\sim LKJcorr(2) \\
-\end{aligned}
-$$ {#eq-model-syllables}
+![](_assets/img/eq-2.png)
 
 
 ```{r syllables-posterior}
@@ -171,7 +185,6 @@ $$ {#eq-model-syllables}
 #| echo: false
 #| warning: false
 #| message: false
-rope_interval <- c(lower = -0.5, upper = 0.5)
 
 # tidy up predictor names
 post_draws_list <- posterior_syllables_summary |> 
@@ -179,12 +192,13 @@ post_draws_list <- posterior_syllables_summary |>
 
 ```
 
-We fit this model running `r dim(model_fit_syllables$fit)[2]` sampling chains with `r format(dim(model_fit_syllables$fit)[1], big.mark = ",")` iterations each. @tbl-syll-coefs shows a summary of the posterior distribution of the fixed effects in the model. As expected, words with more syllables scored higher in syllabic frequency: all posterior draws for the regression coefficient of the main effect of this predictor fell outside the ROPE defined between -0.5 and +0.5 ($\beta$ = `r round(post_draws_list[["b_n_syll_std"]]$.value, 2)`, 95% HDI = [`r round(post_draws_list[["b_n_syll_std"]]$.lower, 2)`, `r round(post_draws_list[["b_n_syll_std"]]$.upper, 2)`]). Keeping the number of syllables constant, the effect of cognateness was negligible: all of the posterior distributions of this predictor fell within the ROPE, providing evidence that the true value of the increment in syllabic frequency for every increase in cognateness is equivalent to zero ($\beta$ = `r round(post_draws_list[["b_lv_std"]]$.value, 2)`, 95% HDI = [`r round(post_draws_list[["b_lv_std"]]$.lower, 2)`, `r round(post_draws_list[["b_lv_std"]]$.upper, 2)`]).
+We fit this model running `r dim(model_fit_syllables$fit)[2]` sampling chains with `r format(dim(model_fit_syllables$fit)[1], big.mark = ",")` iterations each. @stbl-syll-coefs shows a summary of the posterior distribution of the fixed effects in the model. As expected, words with more syllables scored higher in syllabic frequency: all posterior draws for the regression coefficient of the main effect of this predictor fell outside the ROPE defined between -0.5 and +0.5 ($\beta$ = `r round(post_draws_list[["b_n_syll_std"]]$.value, 2)`, 95% HDI = [`r round(post_draws_list[["b_n_syll_std"]]$.lower, 2)`, `r round(post_draws_list[["b_n_syll_std"]]$.upper, 2)`]). Keeping the number of syllables constant, the effect of cognateness was negligible: all of the posterior distributions of this predictor fell within the ROPE, providing evidence that the true value of the increment in syllabic frequency for every increase in cognateness is equivalent to zero ($\beta$ = `r round(post_draws_list[["b_lv_std"]]$.value, 2)`, 95% HDI = [`r round(post_draws_list[["b_lv_std"]]$.lower, 2)`, `r round(post_draws_list[["b_lv_std"]]$.upper, 2)`]).
 
-```{r tbl-syll-coefs}
-#| label: tbl-syll-coefs
-#| tbl-cap: "Posterior distribution of regression coefficients."
-#| tbl-note: "Median: median of the posterior distribution in the probability scale. 95\\% HDI: 95\\% highest density interval of the distribution; narrowest range of values that contains 95\\% of the distribution, and therefore is 95\\% likely to contain the true value, given the data. On top of each distribution, we indicate the proportion of posterior samples in the 95\\% HDI that fall into the region of practical equivalence (ROPE). This proportion indicates the probability of the true value of the coefficient being equivalent to zero. Lower values indicate that the true value is unlikely to be zero of equivalent to zero."
+::: {#stbl-syll-coefs}
+
+```{r}
+#| label: stbl-syll-coefs
+#| tbl-cap: "Posterior distribution of regression coefficients. β: median of the posterior distribution in the probability scale. 95\\% HDI: 95\\% highest density interval of the distribution. *p*(ROPE): overlap between the 95\\% HDI and the ROPE, indicating the posterior probability that the true value of the coefficient is equivalent to zero."
 #| echo: false
 #| message: false
 #| warning: false
@@ -194,34 +208,52 @@ tbl_data <- posterior_syllables_summary |>
     mutate(
         .variable_name = gsub("×", '$\\\\times$', .variable_name),
         .hdi = paste0("[", round(.lower, 3),
-                      ", ", round(.upper, 3), "]"),
-        .rope = sub("^(-?)0.", "\\1.",
-                    sprintf("%.3f", .rope)),
-        .rope = ifelse(is.na(.rope), "-", .rope)) |> 
-    select(.variable_name, .value, .lower, .upper, .hdi, .rope) 
+                      ", ", round(.upper, 3), "]")) |> 
+    select(.variable_name, .value, .hdi, .rope) 
 
-col_names <- c("", "$\\beta$", "95\\% HDI", "$p(\\text{ROPE})$")
+col_names <- c("", "β", "95% HDI", "p(ROPE)")
 
-tbl_data |> 
-    select(-c(.lower, .upper)) |> 
-    knitr::kable(
-        format = "latex",
-        escape = FALSE,
-        col.names = col_names,
+colnames(tbl_data) <- col_names
+
+
+tt(tbl_data) |>
+    format_tt(markdown = TRUE) |> 
+    format_tt(
+        j = c(4),
+        digits = 12,
+        num_fmt = "significant_cell",
+        replace = "-",
+        sprintf = "%.03f",
+        num_mark_big = ",",
+        num_mark_dec = ".") |> 
+    format_tt(
+        j = c(2),
         digits = 3,
-        booktabs = TRUE,
-        align = "lclr",
-        linesep = ""
-    ) |> 
-    kableExtra::kable_styling() |> 
-    add_footnote("$\\beta$: median of the posterior distribution in the probability scale. 95\\% HDI: 95\\% highest density interval of the distribution. $p(\\text{ROPE})$: overlap between the 95\\% HDI and the ROPE, indicating the posterior probability that the true value of the coefficient is equivalent to zero.", notation = "none")
+        replace = "-",
+        num_mark_big = ",",
+        num_mark_dec = ".",
+        num_fmt = "decimal") |> 
+    style_tt(i = c(1, nrow(tbl_data)), j = 1, align = "l") |> 
+    style_tt(
+        i = 0,
+        j = 1:ncol(tbl_data),
+        line = "tb",
+        line_width = 0.1) |> 
+    style_tt(
+        i = nrow(tbl_data),
+        j = 1:ncol(tbl_data),
+        line = "b",
+        line_width = 0.1) 
 ```
+:::
 
-@fig-syll-marginal shows the median posterior-predicted syllabic frequencies for words with one to four syllables, for the whole range of cognateness values. Overall, cognate words' syllabic frequency is equivalent to that of non-cognates. This suggests that the cognate facilitation effect in word acquisition reported in the present study is not the result from an association between cognateness and higher syllabic frequencies.
+@sfig-syll-marginal shows the median posterior-predicted syllabic frequencies for words with one to four syllables, for the whole range of cognateness values. Overall, cognate words' syllabic frequency is equivalent to that of non-cognates. This suggests that the cognate facilitation effect in word acquisition reported in the present study is not the result from an association between cognateness and higher syllabic frequencies.
 
-```{r fig-syll-marginal}
-#| label: fig-syll-marginal
-#| fig-cap: "Posterior-predictions of the syllabic frequency model. Thicker lines indicate the median of the posterior predictions, and thinner lines indicate individual posterior predictions."
+::: {#sfig-syll-marginal}
+
+```{r sfig-syll-marginal}
+#| label: sfig-syll-marginal
+#| fig-cap: "Posterior predictions of the syllabic frequency model. Thicker lines indicate the median of the posterior predictions, and thinner lines indicate individual posterior predictions."
 #| fig-width: 9
 #| fig-height: 2.5
 #| out-width: 80%
@@ -272,7 +304,8 @@ suppressMessages({
     invisible({
         devices <- c("png", "pdf", "svg", "tiff", "eps")
         paths <- paste("_assets/img/Figure_6_SuppInfo", devices, sep = ".")
-        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 9, height = 2.5, units = "in"))
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 10, height = 2.5, units = "in"))
     })
 })
 ```
+:::

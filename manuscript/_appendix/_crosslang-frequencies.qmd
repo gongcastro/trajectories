@@ -1,0 +1,250 @@
+```{r childes-data}
+childes <- childesr::get_participants(
+  collection = NULL,
+  corpus = NULL,
+  target_child = NULL,
+  role = "target_child",
+  role_exclude = NULL,
+  sex = NULL,
+  connection = NULL,
+  db_version = "current",
+  db_args = NULL
+) 
+
+childes_participants <- childes |>
+filter(min_age>=10,
+max_age >= 32) |>
+count(language) |>
+arrange(desc(n))
+
+childes_corpora <- childes |>
+count(language, corpus_name) |>
+count(language) |>
+arrange(desc(n))
+
+eng_corp_names <- unique(childes[childes$language=="eng",]$corpus_name)
+eng_corp_names_bil <- unique(childes[grepl(" eng|eng ", childes$language),]$corpus_name)
+cat_corp_names <- unique(childes[grepl("cat", childes$language),]$corpus_name)
+cat_corp_names_bil <- unique(childes[grepl("cat | cat", childes$language),]$corpus_name)
+spa_corp_names <- unique(childes[grepl("spa", childes$language),]$corpus_name)
+spa_corp_names_bil <- unique(childes[grepl("spa | spa", childes$language),]$corpus_name)
+
+childes_tokens <- get_speaker_statistics(corpus = c(eng_corp_names, 
+cat_corp_names,
+ cat_corp_names_bil,
+ spa_corp_names,
+ spa_corp_names_bil),
+role = "target_child",
+ age = c(10, 32))
+
+childes_types <- get_types(corpus = c(eng_corp_names, cat_corp_names, spa_corp_names),
+role = "target_child", age = c(10, 32)) |>
+mutate(is_lang = case_when(grepl("eng", language) ~ "English",
+grepl("cat", language) ~ "Catalan",
+grepl("spa", language) ~ "Spanish",
+.default = "Other")) |>
+count(is_lang, gloss) |>
+summarise(unique_words = n(),
+n = sum(n),
+.by = c(is_lang))
+
+tokens_count <- childes_tokens |>
+mutate(is_eng = language=="eng",
+ is_cat = language=="cat", 
+ is_cat_bil = grepl("cat", language),
+ is_spa = language=="spa",
+ is_spa_bil = grepl("spa", language)) |>
+summarise(tokens_eng = sum(num_tokens[is_eng]),
+tokens_cat = sum(num_tokens[is_cat]),
+tokens_cat_all = sum(num_tokens[is_cat_bil]),
+tokens_spa = sum(num_tokens[is_spa]),
+tokens_spa_all = sum(num_tokens[is_spa_bil])
+)
+
+eng_corp <- sum(childes_corpora[childes_corpora$language=="eng",]$n)
+cat_corp <- sum(childes_corpora[grepl("cat", childes_corpora$language),]$n)
+
+eng_participants <- childes_participants[childes_participants$language=="eng",]$n
+cat_participants <- childes_participants[childes_participants$language=="cat",]$n
+cat_participants_all <- sum(childes_participants[grepl("cat", childes_participants$language),]$n)
+spa_participants <- childes_participants[childes_participants$language=="spa",]$n
+spa_participants_all <- sum(childes_participants[grepl("spa", childes_participants$language),]$n)
+```
+
+
+The CHILDES database is commonly used to extract lexical frequencies from word-forms across many languages. The number of word-form for which information is available, and the number of individual children involved change substantially across corpora and languages. For instance, `r eng_corp` corpora are available for English (excluding bilingual corpora) involving `r eng_participants` unique children in the relevant age rage (10 to 32 months) (see @sfig-participants-childes), and providing information about the lexical frequency of `r format(childes_types[childes_types$is_lang=="English",]$n, big.mark = ",")` unique word-forms, based on `r format(tokens_count$tokens_eng, big.mark = ",")`. The number of corpora including Spanish tokens is lower than for English: `r length(spa_corp_names)` corpora include Spanish tokens, of which `r length(spa_corp_names_bil)` are bilingual corpora. Nonetheless, these Spanish corpora (including the bilingual corpora) involve data from a sizable amount of participants, with `r spa_participants_all` total distinct children included, and provide information about `r format(childes_types[childes_types$is_lang=="Spanish",]$n, big.mark = ",")` unique word-forms in total, based on `r format(tokens_count$tokens_spa_all, big.mark = ",")` tokens. Information available from the Catalan corpora is scarce. Only `r length(cat_corp_names)` corpora include Catalan tokens, of which `r length(cat_corp_names_bil)` are bilingual corpora. Corpora including Catalan tokens (including bilingual corpora) involve `r cat_participants_all` total distinct children, and provide information about `r format(childes_types[childes_types$is_lang=="Catalan",]$n, big.mark = ",")` unique word-forms in total, based on `r format(tokens_count$tokens_cat_all, big.mark = ",")` tokens. Given the low number of tokens, unique words, and critically, number of unique participants in the Catalan corpora, estimated lexical frequencies derived from Catalan corpora in CHILDES would be substantially unreliable.
+
+::: {#sfig-participants-childes}
+
+```{r}
+#| label: sfig-participants-childes
+#| fig-cap: Number of distinct children included in the corpora of each language.
+#| fig-width: 12
+#| fig-height: 7
+childes_participants |>
+ mutate(is_lang = if_else(!language %in% c("cat", "spa"), "", language),
+ language = if_else(n < 6, "Other", language)) |>
+ summarise(n = sum(n), .by = c(is_lang, language)) |>
+ggplot(aes(reorder(language, desc(n)), n, 
+fill = is_lang, 
+label = format(n, big.mark = ","))) +
+ annotate(geom = "segment", y = 607, yend = 606, x = "spa", xend = "spa",
+ arrow = arrow(type = "closed", length = unit(0.02, "npc")), colour = clrs[1]) +
+  annotate(geom = "segment", y = 100, yend = 99, x = "cat", xend = "cat",
+ arrow = arrow(type = "closed", length = unit(0.02, "npc")),
+ colour = clrs[1]) +
+geom_col(colour = "white") +
+geom_text(size = 3.5, angle = 0, hjust = 0.5, position = position_nudge(y = 25)) +
+scale_fill_manual(values = c("grey", clrs[1], clrs[1])) +
+scale_y_continuous(labels = \(x) format(x, big.mark = ",")) +
+labs(x = "Language", y = "Number of children included in the corpora") + 
+theme(legend.position = "none",
+axis.title.x = element_blank(),
+axis.text.x = element_text(angle = 90, hjust = 1, size = 10),
+panel.grid.major.x = element_blank(),
+panel.grid.minor.y = element_blank())
+```
+
+:::
+
+In line with the available literature, lexical frequency is an important predictor of word acquisition: word-forms with higher lexical frequency are acquired at earlier ages than word-forms with lower lexical frequency. For this reason, we included lexical frequency as a nuance predictor in our model, as this would provide more accurate estimations. Because of the scarcity of data about lexical information scores for Catalan words in CHILDES, we decided---in line with previous studies---to map English lexical frequencies onto Catalan and Spanish lexical frequencies, under the assumption that lexical frequency would, on average, remain stable across translation equivalents. While this approach is sub-optimal---lexical frequencies are expected to vary to some degree across languages---alternative strategies may induce more concerning artifacts.
+
+First, using information from the Catalan CHILDES corpora may lead to unreliable estimates of lexical frequencies: the particular frequency with which a given word-form appears in a corpus may be due to the particular interaction taking place during the recording of the session (e.g., the word *bike* may appear several times if a bike was present in the room during the recording), or might reflect the particular interests of the child. The influence of both factors may be overweighted by the inclusion of recordings from a larger pool of children, as it is the case of the English corpora. But this is not the case for Catalan. Second, not using information about the lexical frequency of the items, even if mapped from the English CHILDES corpora, may reduce the accuracy of the estimations of the model, as lexical frequency is one of the strongest predictors of word acquisition. For these reasons, we made the methodological decision to impute the lexical frequencies extracted from the English corpora in CHILDES into the Catalan and Spanish translation equivalents.
+
+Below, we report an estimation of the similarity between the lexical frequencies of several pairs of languages, as extracted from adult corpora. These frequencies were extracted from the PHOR database [@costa2023phor], which includes the following languages: American English [SUTBLEX-US, @brysbaert2009moving], British English [SUTBLEX-UK, @van2014subtlex], European Portuguese [SUBTLEX-PT, @soares2015advantages], German [SUBTLEX-DE, @brysbaert2011word], and Spanish [ESPAL, @duchon2013espal].
+
+```{r}
+phor <- read_xlsx(
+  here::here(
+    "data-raw", "PHOR_in_One_LDB.xlsx"
+  ),
+  na = "NA",
+  .name_repair = janitor::make_clean_names
+)
+
+rename_func <- function(x) {
+  y <- ifelse(
+    grepl("wordform", x),
+    paste0("wordform_", gsub("_wordform", "", x)),
+    paste0("freq_", gsub("subtlex_|_log10_abs_", "", x))
+  )
+  y <- gsub("_zipf", "", y)
+  y <- gsub("am_e", "us1", y)
+  y <- gsub("uk_e", "uk1", y)
+  y <- gsub("br_e", "uk1", y)
+  y <- gsub("br_p", "pt1", y)
+  y <- gsub("ep", "pt1", y)
+  y <- gsub("espal1", "es1", y)
+  y <- gsub("1", "", y)
+  return(y)
+}
+
+vars <- c(
+  "subtlex_us_log10_abs_1",
+  "subtlex_uk_log10_abs_1",
+  "subtlex_de_log10_abs_1",
+  "subtlex_pt_log10_abs_1",
+  "espal_log10_abs_1"
+)
+
+freqs <- phor |>
+  filter(po_s_all == "N") |>
+  select(
+    matches("wordform"),
+    any_of(vars),
+    -ends_with("_2")
+  ) |>
+  rename_with(rename_func) |>
+  mutate(id = row_number()) |>
+  pivot_longer(
+    -id,
+    names_to = c(".value", "language"),
+    names_pattern = "(.+)_(.+)",
+    names_transform = toupper
+  ) |>
+  janitor::clean_names()
+
+
+all_combs <- expand_grid(
+  l1 = unique(freqs$language),
+  l2 = unique(freqs$language)
+) |>
+  filter(l1 != l2) |>
+  rowwise() |>
+  mutate(all = list(sort(c(l1, l2)))) |>
+  pull(all) |>
+  unique()
+
+comb_labels <- map_chr(all_combs, \(x) paste0(x, collapse = "-"))
+
+freq_pairs <- map(all_combs, function(x) {
+  freqs |>
+    filter(language %in% x) |>
+    pivot_wider(
+      id_cols = id,
+      names_from = language,
+      values_from = c(freq, wordform),
+    ) |>
+    set_names(c("id", "freq1", "freq2", "wordform1", "wordform2")) |>
+    drop_na()
+}) |>
+  set_names(comb_labels)
+
+corrs <- freq_pairs |>
+  map2_df(comb_labels, function(x, y) {
+    corr <- cor.test(x$freq1, x$freq2)
+    tibble(
+      pair = y,
+      estimate = corr$estimate,
+      df = corr$parameter,
+      .lower = corr$conf.int[1],
+      .upper = corr$conf.int[2]
+    )
+  }) |>
+  mutate(r2 = estimate^2) |>
+  arrange(desc(estimate))
+```
+
+@sfig-corr shows a scatter plot and univariate fitted linear model for each pair of languages, along with the Pearson correlation ($r$) between the lexical frequencies (expressed as $log_10(\text{Counts}+1)$ of each pair of languages, and their corresponding 95% confidence interval and coefficient of determination ($R^2$).
+
+
+::: {#sfig-corr}
+
+```{r}
+#| fig-cap: "Pairwise scatter plots between adult lexical frequencies in English (UK and US), European Portuguese (PT), German (DE), and European Spanish (ES)."
+#| fig-height: 10
+#| fig-width: 12
+freq_pairs |>
+  map2(comb_labels, function(x, y) {
+    corr <- cor.test(x$freq1, x$freq2)
+    lab <- sprintf(
+          "*r*(%.0f) = %.2f [%.2f, %.2f], *R<sup>2</sup>* = %.2f",
+          corr$parameter, corr$estimate, corr$conf.int[1], corr$conf.int[2], corr$estimate^2
+        )
+    ggplot(x, aes(freq1, freq2, label = lab)) +
+      geom_point(alpha = 1 / 4, size = 1, colour = "grey") +
+      annotate(
+        geom = "richtext",
+       label = lab,
+       fill = "white",
+       label.color = NA,
+        color = "black",
+        x = 0,
+        y = 6,
+        hjust = 0,
+        vjust = 1,
+         label.r = unit(0, "lines"),
+         label.size = 0) +
+      labs(
+        x = "Frequency\nLog10 (abs+1)",
+        y = "Frequency\nLog10 (abs+1)",
+        title = y,
+      ) +
+      geom_smooth(method = "lm", colour = clrs[1], formula = "y ~ x") +
+      scale_y_continuous(limits = c(0, 6.5)) +
+      theme(axis.title = element_blank(),
+      panel.grid.minor = element_blank())
+  }) |>
+  reduce(`+`)
+```
+:::

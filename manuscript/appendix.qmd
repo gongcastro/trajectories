@@ -1,24 +1,5 @@
 ---
-csl: "_assets/apa7.csl"
-bibliography: "_assets/references.bib"
-link-citations: true
-editor: source
-
-fig-align: center
-fig-dpi: 800
-echo: false
-warning: false
-message: false
-
-format:
-  arxiv-pdf:
-    linenumbers: true
-    doublespacing: false
-    runninghead: "Cognate beginnings to bilingual lexical acquistion (Appendix)"
-    include-in-header: 
-      text: |
-        \usepackage{tipa}
-        \usepackage{booktabs}
+title: "Supplementary Materials"
 ---
 
 ```{r setup}
@@ -27,89 +8,118 @@ format:
 #| message: false
 #| warning: false
 # load objects -----------------------------------------------------------------
-library(knitr)
-library(kableExtra)
+library(tinytable)
 library(ggplot2)
 library(ggdist)
 library(patchwork)
+library(readxl)
+library(purrr)
+library(childesr)
+library(ggtext)
+
+options(
+  tinytable_tt_digits = 2,
+  tinytable_theme_placement_latex_float = "H"
+)
 
 targets::tar_config_set(
-    store = here::here("_targets"),
-    script = here::here("_targets.R")
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
 )
 
 targets::tar_load_globals()
 
 targets::tar_load(c(
-    bvq_data, childes, 
-    items,
-    model_summary,
-    participants, 
-    responses
+  bvq_data, childes,
+  items,
+  model_summary,
+  participants,
+  responses
 ))
 
-targets::tar_load(c(model_fit, 
-                    model_convergence,
-                    model_ppcs))
+targets::tar_load(c(
+  model_fit,
+  model_convergence,
+  model_ppcs
+))
 
-targets::tar_load(c(posterior_doe_summary, 
-                    posterior_doe_draws))
+targets::tar_load(c(
+  model_composite,
+  model_draws_composite,
+  model_summary_composite,
+  model_vars_dict_composite
+))
 
-targets::tar_load(c(syllables_data,
-                    model_fit_syllables, 
-                    post_syllables,
-                    posterior_syllables_summary))
+targets::tar_load(c(
+  syllables_data,
+  model_fit_syllables,
+  post_syllables,
+  posterior_syllables_summary
+))
 
 my_theme <- theme_minimal() +
-    theme(panel.grid = element_line(
-        colour = "grey",
-        linetype = "dotted"
+  theme(
+    panel.grid = element_line(
+      colour = "grey",
+      linetype = "dotted"
     ),
     axis.line = element_line(colour = "black"),
     text = element_text(size = 12, colour = "black"),
     axis.text = element_text(colour = "black")
-    )
+  )
 
 theme_set(my_theme)
 
 save_image <- function(file, ...) {
-    suppressWarnings({
-        invisible({
-            devices <- c("png", "pdf", "svg", "tiff", "eps")
-            paths <- file.path(paste(file, devices, sep = "."))
-            purrr::map(paths,
-                       \(x) ggsave(x, ...),
-                       .progress = TRUE)
-        })
+  suppressWarnings({
+    invisible({
+      devices <- c("png", "pdf", "svg", "tiff", "eps")
+      paths <- file.path(paste(file, devices, sep = "."))
+      purrr::map(paths,
+        \(x) ggsave(x, ...),
+        .progress = TRUE
+      )
     })
+  })
 }
 
-post_draws_list <- model_summary |>
-    mutate(across(
-        .value:.upper,
-        \(x) ifelse(grepl("Intercept", .type),
-                    plogis(x), x / 4
-        )
-    )) |>
-    split(model_summary$.variable)
+post_draws_list <- model_summary_composite |>
+  mutate(across(
+    .value:.upper,
+    \(x) ifelse(grepl("Intercept", .type),
+      plogis(x), x / 4
+    )
+  )) |>
+  split(model_summary_composite$.variable)
+
+rope_interval <- c(lower = -0.1 / 4, upper = 0.1 / 4, accuracy = 0.1)
+
+clrs <- c("#003f5c", "#58508d", "#bc5090", "#ff6361", "#ffa600")
 ```
 
-## Appendix A: model details {.appendix .unnumbered}
+## SI1: Cross-linguistic lexical frequencies {.appendix .unnumbered}
+
+{{< include _appendix/_crosslang-frequencies.qmd >}}
+
+{{< pagebreak >}}
+
+
+## SI2: model details {.appendix .unnumbered}
 
 {{< include _appendix/_model-details.qmd >}}
 
 {{< pagebreak >}}
 
-## Appendix B: frequency and language exposure as separate predictors {.appendix .unnumbered}
 
-{{< include _appendix/_model-doe.qmd >}}
+## SI3: syllable frequency analysis {.appendix .unnumbered}
+
+{{< include _appendix/_syllable-frequency.qmd >}}
 
 {{< pagebreak >}}
 
+## SI4: Language exposure-weighted lexical frequency predictor {.appendix .unnumbered}
 
-## Appendix C: syllable frequency {.appendix .unnumbered}
-
-{{< include _appendix/_syllable-frequency.qmd >}}
+{{< include _appendix/_model-composite.qmd >}}
 
 {{< pagebreak >}}
 

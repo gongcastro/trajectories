@@ -1,2 +1,6 @@
 /.quarto/
 submissions/
+manuscript/_freeze/
+_assets/img/
+_freeze/
+version-control/

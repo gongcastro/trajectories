@@ -2,22 +2,17 @@
 #' @param name A character string indicating the name to be assigned to the model
 #' @param ... Arguments to be passed to [brms::brm()]
 fit_model <- function(name, ...) {
-    fit <- brms::brm(...,
-        iter = 2000,
-        chains = 4,
-        init = 0.5,
-        seed = 888,
-        backend = "cmdstanr",
-        file = glue::glue("results/fits/{name}.rds"),
-        file_refit = "on_change",
-        control = list(
-            adapt_delta = 0.9,
-            max_treedepth = 15
-        ),
-        save_model = glue::glue("Stan/{name}.stan")
-    )
+  fit <- brms::brm(...,
+    iter = 2e3L,
+    chains = 4,
+    init = 0.5,
+    seed = 888,
+    backend = "cmdstanr",
+    file = glue::glue("results/fits/{name}.rds"),
+    control = list(adapt_delta = 0.9, max_treedepth = 15)
+  )
 
-    return(fit)
+  return(fit)
 }
 
 #' Extract posterior draws of fixed effect coefficients from brmsfit model via [tidybayes::gather_draws()].
@@ -27,37 +22,37 @@ fit_model <- function(name, ...) {
 #' @param vars_dict Dictionary of variable names, as returned by `get_vars_dict()` or `get_vars_dict_doe()`
 #' @param ... Arguments to be passed to [tidybayes::gather_draws()].
 get_posterior_draws <- function(model, data, vars_dict, ...) {
-    # posterior draws
-    posterior_draws <- tidybayes::gather_draws(model, `b_.*`, regex = TRUE) |>
-        mutate(
-            .variable_name = factor(.variable,
-                levels = names(vars_dict),
-                labels = vars_dict
-            ) |>
-                as.character(),
-            type = ifelse(
-                grepl("Intercept", .variable),
-                glue::glue("Intercepts (at {round(mean(data$age, 2))} months)"),
-                "Slopes"
-            ),
-            parameter = ifelse(
-                grepl("Intercept", .variable),
-                gsub("Intercept \\(|\\)", "", .variable),
-                .variable
-            )
-        ) |>
-        select(.variable, .variable_name,
-            .type = type,
-            .chain, .iteration, .draw, .value
-        ) |>
-        ungroup()
+  # posterior draws
+  posterior_draws <- tidybayes::gather_draws(model, `b_.*`, regex = TRUE) |>
+    mutate(
+      .variable_name = factor(.variable,
+        levels = names(vars_dict),
+        labels = vars_dict
+      ) |>
+        as.character(),
+      type = ifelse(
+        grepl("Intercept", .variable),
+        glue::glue("Intercepts (at {round(mean(data$age, 2))} months)"),
+        "Slopes"
+      ),
+      parameter = ifelse(
+        grepl("Intercept", .variable),
+        gsub("Intercept \\(|\\)", "", .variable),
+        .variable
+      )
+    ) |>
+    select(.variable, .variable_name,
+      .type = type,
+      .chain, .iteration, .draw, .value
+    ) |>
+    ungroup()
 
-    save_files(posterior_draws,
-        formats = "csv",
-        folder = "results/posterior"
-    )
+  save_files(posterior_draws,
+    formats = "csv",
+    folder = "results/posterior"
+  )
 
-    return(posterior_draws)
+  return(posterior_draws)
 }
 
 #' Extract posterior draws of fixed effect coefficients from brmsfit model via [bayestesteR::describe_posterior()].
@@ -71,39 +66,40 @@ get_posterior_summary <- function(model,
                                   vars_dict,
                                   rope_interval = c(lower = -0.1, upper = +0.1),
                                   ...) {
-    # posterior draws
-    posterior_summary <- tidybayes::gather_draws(model, `b_.*`, regex = TRUE, ...) |>
-        tidybayes::median_hdci() |>
-        mutate(
-            .variable_name = factor(.variable,
-                levels = names(vars_dict),
-                labels = vars_dict,
-                ordered = TRUE
-            ),
-            type = ifelse(
-                grepl("Intercept", .variable),
-                glue::glue("Intercepts (at {round(mean(data$age, 2))} months)"),
-                "Slopes"
-            ),
-            parameter = ifelse(
-                grepl("Intercept", .variable),
-                gsub("Intercept \\(|\\)", "", .variable),
-                .variable
-            ),
-            .rope = get_rope_overlap(.lower, .upper, .rope = rope_interval),
-            .rope = ifelse(grepl("Intercept", .variable), NA, .rope)
-        ) |>
-        arrange(type, .variable_name) |>
-        select(.variable, .variable_name,
-            .type = type,
-            .value, .lower, .upper, .rope
-        ) |>
-        ungroup()
-    
-    save_files(posterior_summary, folder = "results/posterior", formats = "csv")
+  # posterior draws
+  posterior_summary <- tidybayes::gather_draws(model, `b_.*`, regex = TRUE, ...) |>
+    tidybayes::median_hdci() |>
+    mutate(
+      .variable_name = factor(
+        .variable,
+        levels = names(vars_dict),
+        labels = vars_dict,
+        ordered = TRUE
+      ),
+      type = ifelse(
+        grepl("Intercept", .variable),
+        glue::glue("Intercepts (at {round(mean(data$age, 2))} months)"),
+        "Slopes"
+      ),
+      parameter = ifelse(
+        grepl("Intercept", .variable),
+        gsub("Intercept \\(|\\)", "", .variable),
+        .variable
+      ),
+      .rope = get_rope_overlap(.lower, .upper, .rope = rope_interval),
+      .rope = ifelse(grepl("Intercept", .variable), NA, .rope)
+    ) |>
+    arrange(type, .variable_name) |>
+    select(.variable, .variable_name,
+      .type = type,
+      .value, .lower, .upper, .rope
+    ) |>
+    ungroup()
 
-    return(posterior_summary)
+  return(posterior_summary)
 }
+
+
 
 #' Get model R-hat scores
 #'
@@ -117,15 +113,11 @@ get_posterior_summary <- function(model,
 #' [bayesplot::rhat()].
 #' * .neff: effective sample size, as returned by [bayesplot::neff_ratio()]
 get_model_convergence <- function(model, ...) {
-    out <- tibble::tibble(
-        .variable = variables(model),
-        .rhat = rhat(model, ...),
-        .neff = neff_ratio(model, ...)
-    )
-    
-    save_files(out, folder = "results/posterior", formats = "csv")
-    
-    return(out)
+  tibble::tibble(
+    .variable = variables(model),
+    .rhat = rhat(model, ...),
+    .neff = neff_ratio(model, ...)
+  )
 }
 
 #' Get model posterior predictive checks
@@ -134,7 +126,7 @@ get_model_convergence <- function(model, ...) {
 #' @param ... Arguments to be passed to [brms::posterior_predict()].
 #'
 get_model_ppc <- function(model, ...) {
-    brms::posterior_predict(model, ndraws = 100, cores = 4)
+  brms::posterior_predict(model, ndraws = 100, cores = 4)
 }
 
 #' Get overlap between an intervals and a ROPE
@@ -146,9 +138,9 @@ get_model_ppc <- function(model, ...) {
 #' @returns A numeric vector of length `length(.lower)` indicating the proportion of overlap between the interval and the ROPE
 #'
 get_rope_overlap <- function(.lower, .upper, .rope = c(-0.1, 0.1), precision = 1e4) {
-    int <- data.frame(.lower, .upper)
-    fun <- \(x) approx(x, n = precision, method = "linear")
-    int.seq <- purrr::map(apply(int, fun, MARGIN = 1), "y")
-    overlap <- purrr::map_dbl(int.seq, \(x) mean((x >= .rope[1]) & x <= .rope[2]))
-    return(overlap)
+  int <- data.frame(.lower, .upper)
+  fun <- \(x) approx(x, n = precision, method = "linear")
+  int.seq <- purrr::map(apply(int, fun, MARGIN = 1), "y")
+  overlap <- purrr::map_dbl(int.seq, \(x) mean((x >= .rope[1]) & x <= .rope[2]))
+  return(overlap)
 }

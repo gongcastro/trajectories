@@ -1,6 +1,9 @@
 ### Model structure and priors
 
-We used Stan [@carpenter2017stan] as the probabilistic language behind the estimation of our Bayesian models in this study, with `brms` as its R interface [@burkner2017brms]. This language implements the Markov Chain Monte Carlo (MCMC) algorithm using the Hamiltonian Monte Carlo method (HMC) to explore the posterior distribution of the model. Broadly, this algorithm is used to iteratively sample the joint sampling space of the parameters to be estimated in the model, and compute, for each value sampled, its likelihood under some probability distribution previously defined. We run `r english::words(dim(model_fit$fit)[2])` MCMC chains, each `r format(dim(model_fit$fit)[1], big.mark = ",")` iterations long each.
+Equation 1 shows a formal description of the model. We used Stan [@carpenter2017stan] as the probabilistic language behind the estimation of our Bayesian models in this study, with `brms` as its R interface [@burkner2017brms]. This language implements the Markov Chain Monte Carlo (MCMC) algorithm using the Hamiltonian Monte Carlo method (HMC) to explore the posterior distribution of the model. Broadly, this algorithm is used to iteratively sample the joint sampling space of the parameters to be estimated in the model, and compute, for each value sampled, its likelihood under some probability distribution previously defined. We run `r english::words(dim(model_fit$fit)[2])` MCMC chains, each `r format(dim(model_fit$fit)[1], big.mark = ",")` iterations long each.
+
+
+![](_assets/img/eq-1.png)
 
 ### Considerations on statistical power and sample size
 
@@ -13,12 +16,13 @@ Following @kruschke2014doing, we considered the precision of our estimates as a 
 
 ### Model diagnostics
 
-One way to diagnose the behaviour of HMC is to inspect whether the different MCMC chains (if more than one) have converged to a similar region of the posterior. The Gelman-Rubin diagnostic [$\hat{R}$ or R-hat @gelman1992inference] provides a measure of chain convergence by comparing the variance within each chain *versus* the variance between each chain. Both are expected to be identical when chains have perfectly converged, so that $\hat{R} = 1$. Values lower than 1.01 are recommended, while values higher than 1.05 indicate that chains might have trouble converging and therefore the estimated parameters must be taken with caution. @fig-rhats-neffs (A) shows the distribution of $\hat{R}$ values for the coefficients of the fixed effect of our models, which we used for statistical inference. Most values are lower than 1.01, and never higher than 1.05, which provides evidence of successful MCMC convergence.
+One way to diagnose the behaviour of HMC is to inspect whether the different MCMC chains (if more than one) have converged to a similar region of the posterior. The Gelman-Rubin diagnostic [$\hat{R}$ or R-hat @gelman1992inference] provides a measure of chain convergence by comparing the variance within each chain *versus* the variance between each chain. Both are expected to be identical when chains have perfectly converged, so that $\hat{R} = 1$. Values lower than 1.01 are recommended, while values higher than 1.05 indicate that chains might have trouble converging and therefore the estimated parameters must be taken with caution. @sfig-rhats-neffs (A) shows the distribution of $\hat{R}$ values for the coefficients of the fixed effect of our models, which we used for statistical inference. Most values are lower than 1.01, and never higher than 1.05, which provides evidence of successful MCMC convergence.
 
-Another diagnostic of good MCMC converge is the ratio of effective sample size to total sample size ($N_{eff}/N$), which indicates the proportion of samples in the chain that resulted from a non-divergent transition. Values closer to 1 are ideal, as they indicate that all posterior samples from the MCMC were used to estimate the posterior distribution of the parameter. Values larger than 0.1 are recommended. @fig-rhats-neffs (B) shows the distribution of the effective sample sizes of the coefficients of the fixed effects in our models. Most values are larger than 0.1, although model 0 ($\mathcal{M}_0$) accumulates most effective sample sizes close to 0.1.
+Another diagnostic of good MCMC converge is the ratio of effective sample size to total sample size ($N_{eff}/N$), which indicates the proportion of samples in the chain that resulted from a non-divergent transition. Values closer to 1 are ideal, as they indicate that all posterior samples from the MCMC were used to estimate the posterior distribution of the parameter. Values larger than 0.1 are recommended. @sfig-rhats-neffs (B) shows the distribution of the effective sample sizes of the coefficients of the fixed effects in our models. Most values are larger than 0.1, although model 0 ($\mathcal{M}_0$) accumulates most effective sample sizes close to 0.1.
 
-```{r fig-rhats-neffs}
-#| label: fig-rhats-neffs
+::: {#sfig-rhats-neffs}
+
+```{r}
 #| fig-cap: "MCMC convergence diagnostic of all parameters in the model. Each dot represents the score of one parameter. (A) Distribution of the Gelman-Rubin (R-hat) scores. (B) Distribution of the ratio of effective sample size."
 #| echo: false
 #| message: false
@@ -28,7 +32,7 @@ Another diagnostic of good MCMC converge is the ratio of effective sample size t
 #| out-width: 100%
 model_convergence |> 
     ggplot(aes(.rhat)) +
-    geom_dots(colour = "black") +
+    geom_dots(colour = "grey") +
     geom_vline(xintercept = 1.01, linetype = "dashed") +
     labs(
         x = "R-hat",
@@ -36,7 +40,7 @@ model_convergence |>
     ) +
     model_convergence |> 
     ggplot(aes(.neff)) +
-    geom_dots(colour = "black", na.rm = TRUE) +
+    geom_dots(colour = "grey", na.rm = TRUE) +
     geom_vline(xintercept = 1.01, linetype = "dashed") +
     labs(
         x = "Effective sample size ratio",
@@ -49,14 +53,23 @@ model_convergence |>
         panel.grid = element_blank()
     )
 
-save_image("_assets/img/Figure_1_SuppInfo", 
-           dpi = 1e3L, width = 6, height = 3)
+suppressMessages({
+    invisible({
+        devices <- c("png", "pdf", "svg", "tiff", "eps")
+        paths <- paste("_assets/img/Figure_1_SuppInfo", devices, sep = ".")
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 18, height = 5, units = "cm"))
+    })
+})
 ```
 
-Another way of assessing the behaviour of the HMC algorithm is to visualise the joint posterior distribution for pairs of parameters using bi-variate scatter plots. In @fig-model-pairs we show the pair-wise distribution of posterior samples. Broadly, posterior samples of two parameters should not be correlated. This is the case for all pairs of parameters but for the two intercepts. This is expected behaviour, given that these two parameters correspond to the thresholds between categories in the ordinal regression model, and the distance between both thresholds is fixed in the particular parametrisation of the model. 
+:::
+
+Another way of assessing the behaviour of the HMC algorithm is to visualise the joint posterior distribution for pairs of parameters using bi-variate scatter plots. In @sfig-model-pairs we show the pair-wise distribution of posterior samples. Broadly, posterior samples of two parameters should not be correlated. This is the case for all pairs of parameters but for the two intercepts. This is expected behaviour, given that these two parameters correspond to the thresholds between categories in the ordinal regression model, and the distance between both thresholds is fixed in the particular parametrisation of the model. 
+
+::: {#sfig-model-pairs}
 
 ```{r}
-#| label: fig-model-pairs
+#| label: sfig-model-pairs
 #| fig-cap: "Marginal distribution and bi-variate scatterplot of posterior samples for the fixed regression coefficients in Model 3."
 #| fig-height: 8
 #| fig-width: 10
@@ -67,8 +80,9 @@ Another way of assessing the behaviour of the HMC algorithm is to visualise the 
 #| message: false
 titles <- c("Comprehension",
             "Production",
-            "Age",
             "Length",
+            "Frequency",
+            "Age",
             "Exposure",
             "Cognateness",
             "Age × Exposure",
@@ -77,7 +91,7 @@ titles <- c("Comprehension",
             "Age × Exposure × Cognateness")
 
 posterior <- as_draws_df(model_fit) |>
-    select(`b_Intercept[1]`:`b_age_std:exposure_std:lv_std`)
+    select(`b_Intercept[1]`:`b_age_std:doe_std:lv_std`)
 
 my_diag <- function(data, mapping, ...) {
     ggplot(data = data, mapping = mapping) +
@@ -106,29 +120,38 @@ posterior |>
         lower = NULL,
         columnLabels = c("Intercept\n(Comprehension)",
                          "Intercept\n(Production)",
-                         "Age", "Length", "Exposure",
-                         "Levenshtein", "Age × Exposure",
-                         "Age × Levenshtein", "Exposure × Leveshtein",
-                         "Age × Exposure ×\nLevenshtein"
+                         "Length", "Frequency", "Age", "Exposure",
+                         "Cognateness", "Age × Exposure",
+                         "Age × Cognateness", "Exposure × Cognateness",
+                         "Age × Exposure ×\nCognateness"
         ),
         axisLabels = "none"
     ) +
     theme(strip.text = element_text(size = 5),
           panel.grid = element_blank(),
+          panel.background = element_rect(colour = NA, fill = "white"),
           panel.border = element_blank()
     )
 
-save_image("_assets/img/Figure_2_SuppInfo",
-           dpi = 1e3L, width = 10, height = 8)
+suppressMessages({
+    invisible({
+        devices <- c("png", "pdf", "svg", "tiff", "eps")
+        paths <- paste("_assets/img/Figure_2_SuppInfo", devices, sep = ".")
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 16, height = 15, units = "cm"))
+    })
+})
 
 ```
 
+:::
 
-Finally, we also assessed the predictive performance of the model by doing posterior-predictive checks (PPCs). this involves simulating new datasets from the model and the posterior distribution of its parameters, and checking that, overall, the distribution of the response variable across the simulated datasets is equivalent to the one in the observed dataset. @fig-ppc shows the PPCs of the model.
+Finally, we also assessed the predictive performance of the model by doing posterior-predictive checks (PPCs). this involves simulating new datasets from the model and the posterior distribution of its parameters, and checking that, overall, the distribution of the response variable across the simulated datasets is equivalent to the one in the observed dataset. @sfig-ppc shows the PPCs of the model.
 
-```{r fig-ppc}
-#| label: fig-ppc
-#| fig-cap: "Model posterior predictive checks (PPC). Bars indicate the observed proportion of responses to each category (No, Understands, and Understands and Says). Blue dots and error bars represent the mean proportion of responses simulated from the posterior for each category, and its 95\\% interval."
+::: {#sfig-ppc}
+
+```{r}
+#| label: sfig-ppc
+#| fig-cap: "Model posterior predictive checks (PPC). Bars indicate the observed proportion of responses to each category (No, Understands, and Understands and Says). Error bars represent the mean proportion of responses simulated from the posterior for each category, and its 95\\% interval."
 #| eval: true
 #| echo: false
 #| warning: false
@@ -140,29 +163,26 @@ Finally, we also assessed the predictive performance of the model by doing poste
 y_int <- as.integer(as.integer(model_fit$data$response))
 bayesplot::color_scheme_set(c(rep("grey60", 2), rep("black", 4)))
 
-bayesplot::ppc_bars(
-    y_int,
-    model_ppcs,
-    prob = 0.95,
-    linewidth = 1,
-    size = 1.25,
-    fatten = 2,
-    freq = FALSE
-) +
-    scale_x_continuous(
-        breaks = 1:3,
-        labels = c(
-            "No",
-            "Understands",
-            "Understands and Says"
-        )
-    ) +
-    theme(
-        legend.position = "none",
-        axis.text = element_text(size = 11),
-        panel.grid = element_blank()
-    )
+bayesplot::ppc_bars_data(y_int, model_ppcs) |>
+    mutate(n = nrow(responses),
+           across(l:h, \(x) x / n),
+           x = factor(x, levels = 1:3, labels = c("None", "Comprehension", "Production"))) |>
+    ggplot(aes(x, m, ymin = l, ymax = h)) +
+    geom_col(colour = "grey90", fill = "grey90") +
+    geom_errorbar(width = 0.1,
+                  linewidth = 1/2) +
+                  labs(y = "Proportion of responses") +
+    scale_y_continuous(limits = c(0.2, 0.5),
+                       oob = scales::rescale_none) +
+    theme(panel.grid = element_blank(),
+    axis.title.x = element_blank())
 
-save_image("_assets/img/Figure_3_SuppInfo",
-           dpi = 1e3L, width = 6, height = 3)
+suppressMessages({
+    invisible({
+        devices <- c("png", "pdf", "svg", "tiff", "eps")
+        paths <- paste("_assets/img/Figure_3_SuppInfo", devices, sep = ".")
+        purrr::map(paths, \(x) ggsave(x, dpi = 1e3L, width = 18, height = 12, units = "cm"))
+    })
+})
 ```
+:::

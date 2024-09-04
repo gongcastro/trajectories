@@ -78,10 +78,7 @@ get_childes_frequencies <- function(collection = "Eng-NA",
                      freq_million,
                      freq_zipf)
         
-        save_files(childes, folder = "data", formats = "csv")
-        
     })
-    
     
     return(childes)
 }
@@ -123,14 +120,14 @@ get_items <- function(bvq_data, childes, class = "Noun")
         add_count(te, name = "n_te") |> # get only items with one translation in each language
         dplyr::filter(n_te == 2) |>
         distinct(language, te, .keep_all = TRUE) |> 
-        mutate(xsampa_flat = bvq::flatten_xsampa(xsampa),
-               syll = bvq::syllabify_xsampa(xsampa),
+        mutate(xsampa_flat = flatten_xsampa(xsampa),
+               syll = syllabify_xsampa(xsampa),
                n_syll = purrr::map_int(syll, length),
                item = gsub("cat_|spa_", "", item)) 
     
     syll_freq <- pool_tmp |> 
         left_join(childes, by = c("childes_lemma" = "token")) |> 
-        replace_na(list(freq_million = 1)) |>
+        tidyr::replace_na(list(freq_million = 1)) |>
         unnest_longer(syll) |> 
         summarise(freq_syll = sum(freq_million),
                   .by = c(language, syll)) |> 
