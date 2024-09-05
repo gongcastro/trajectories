@@ -264,30 +264,30 @@ list(
       data = responses,
       vars_dict = get_vars_dict_composite(responses)
     )
-  ),
+  )
 
   # render report ------------------------------------------------------------
 
   # render manuscript
-  tar_target(
-    manuscript,
-    quarto_render("manuscript/manuscript.qmd",
-      quiet = FALSE,
-      cache = FALSE
-    )
-  ),
-  tar_target(
-    title,
-    quarto_render("manuscript/title.qmd",
-      quiet = FALSE,
-      cache = FALSE
-    )
-  ),
-  tar_target(
-    appendix,
-    quarto_render("manuscript/appendix.qmd",
-      quiet = FALSE,
-      cache = FALSE
-    )
-  )
+  # tar_target(
+  #   manuscript,
+  #   quarto_render("manuscript/manuscript.qmd",
+  #     quiet = FALSE,
+  #     cache = FALSE
+  #   )
+  # ),
+  # tar_target(
+  #   title,
+  #   quarto_render("manuscript/title.qmd",
+  #     quiet = FALSE,
+  #     cache = FALSE
+  #   )
+  # ),
+  # tar_target(
+  #   appendix,
+  #   quarto_render("manuscript/appendix.qmd",
+  #     quiet = FALSE,
+  #     cache = FALSE
+  #   )
+  # )
 )

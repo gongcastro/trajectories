@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.5.43">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>cognate-beginnings - Data dictionary</title>
+<title>cognate-beginnings – Data dictionary</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -81,7 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -90,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -108,42 +115,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">cognate-beginnings</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../docs/_repro.html" rel="" target="">
- <span class="menu-text">Reproducibility</span></a>
+    <a class="nav-link" href="../docs/_repro.html"> 
+<span class="menu-text">Reproducibility</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../docs/_data-dictionary.html" rel="" target="" aria-current="page">
- <span class="menu-text">Data</span></a>
+    <a class="nav-link active" href="../docs/_data-dictionary.html" aria-current="page"> 
+<span class="menu-text">Data</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/gongcastro/cognate-beginnings" rel="" target=""><i class="bi bi-github" role="img" aria-label="github">
+    <a class="nav-link" href="https://github.com/gongcastro/cognate-beginnings"> <i class="bi bi-github" role="img" aria-label="github">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
+          </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -151,7 +158,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
         
     </div>
 <!-- main -->
@@ -172,7 +179,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <div class="tabset-margin-container"></div><div class="panel-tabset">
 <ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">Items</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Participants</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Responses</a></li></ul>
@@ -180,14 +189,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>This data frame contains information about the word-forms included in the questionnaire, together with some identifiers used to relate participants’ responses to the information of the word-forms they responded to.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>items <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
 <col style="width: 3%">
 <col style="width: 6%">
@@ -394,32 +403,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
 <p>This data frame contains demographic and linguistic information about participants participants, together with some identifiers used to relate participants’ responses to their corresponding information.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 6%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 4%">
+<col style="width: 9%">
+<col style="width: 9%">
 <col style="width: 5%">
-<col style="width: 12%">
-<col style="width: 12%">
 <col style="width: 6%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 13%">
-<col style="width: 15%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 10%">
+<col style="width: 12%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">id</th>
+<th style="text-align: left;">child_id</th>
+<th style="text-align: left;">response_id</th>
 <th style="text-align: right;">time</th>
 <th style="text-align: left;">time_stamp</th>
 <th style="text-align: left;">list</th>
 <th style="text-align: right;">age</th>
+<th style="text-align: left;">sex</th>
 <th style="text-align: left;">lp</th>
 <th style="text-align: right;">doe_catalan</th>
 <th style="text-align: right;">doe_spanish</th>
@@ -429,10 +442,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-04-19</td>
-<td style="text-align: left;">BL-Short-C</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">31.64</td>
+<td style="text-align: left;">male</td>
 <td style="text-align: left;">Monolingual</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">0.1</td>
@@ -440,10 +455,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">54794</td>
+<td style="text-align: left;">828</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-04-15</td>
-<td style="text-align: left;">BL-Short-C</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">29.31</td>
+<td style="text-align: left;">female</td>
 <td style="text-align: left;">Monolingual</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">0.0</td>
@@ -451,10 +468,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54828</td>
+<td style="text-align: left;">826</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-06-11</td>
-<td style="text-align: left;">BL-Short-A</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">30.78</td>
+<td style="text-align: left;">male</td>
 <td style="text-align: left;">Monolingual</td>
 <td style="text-align: right;">1.0</td>
 <td style="text-align: right;">0.0</td>
@@ -462,10 +481,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">54881</td>
+<td style="text-align: left;">1197</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-06-03</td>
-<td style="text-align: left;">BL-Short-D</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">29.21</td>
+<td style="text-align: left;">female</td>
 <td style="text-align: left;">Bilingual</td>
 <td style="text-align: right;">0.5</td>
 <td style="text-align: right;">0.5</td>
@@ -473,68 +494,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54939</td>
+<td style="text-align: left;">952</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-05-08</td>
-<td style="text-align: left;">BL-Short-C</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">28.91</td>
+<td style="text-align: left;">female</td>
 <td style="text-align: left;">Bilingual</td>
 <td style="text-align: right;">0.2</td>
 <td style="text-align: right;">0.7</td>
 <td style="text-align: left;">University</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">54966</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: left;">2020-05-16</td>
-<td style="text-align: left;">BL-Short-D</td>
-<td style="text-align: right;">28.98</td>
-<td style="text-align: left;">Monolingual</td>
-<td style="text-align: right;">0.0</td>
-<td style="text-align: right;">0.8</td>
-<td style="text-align: left;">Vocational</td>
-</tr>
-<tr class="odd">
 <td style="text-align: left;">54974</td>
+<td style="text-align: left;">1051</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-05-23</td>
-<td style="text-align: left;">BL-Short-B</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">29.24</td>
+<td style="text-align: left;">male</td>
 <td style="text-align: left;">Bilingual</td>
 <td style="text-align: right;">0.4</td>
 <td style="text-align: right;">0.6</td>
 <td style="text-align: left;">Vocational</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">54978</td>
+<td style="text-align: left;">940</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-05-18</td>
-<td style="text-align: left;">BL-Short-C</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">28.98</td>
+<td style="text-align: left;">female</td>
 <td style="text-align: left;">Monolingual</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: left;">University</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td style="text-align: left;">55011</td>
+<td style="text-align: left;">942</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-05-18</td>
-<td style="text-align: left;">BL-Short-A</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">28.45</td>
+<td style="text-align: left;">male</td>
 <td style="text-align: left;">Monolingual</td>
 <td style="text-align: right;">0.2</td>
 <td style="text-align: right;">0.8</td>
 <td style="text-align: left;">Vocational</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">55027</td>
+<td style="text-align: left;">811</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: left;">2020-04-13</td>
-<td style="text-align: left;">BL-Short-B</td>
+<td style="text-align: left;">bvq-short</td>
 <td style="text-align: right;">27.14</td>
+<td style="text-align: left;">male</td>
 <td style="text-align: left;">Bilingual</td>
 <td style="text-align: right;">0.6</td>
 <td style="text-align: right;">0.3</td>
+<td style="text-align: left;">University</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">55056</td>
+<td style="text-align: left;">950</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">2020-05-08</td>
+<td style="text-align: left;">bvq-short</td>
+<td style="text-align: right;">27.99</td>
+<td style="text-align: left;">male</td>
+<td style="text-align: left;">Monolingual</td>
+<td style="text-align: right;">0.1</td>
+<td style="text-align: right;">0.8</td>
 <td style="text-align: left;">University</td>
 </tr>
 </tbody>
@@ -542,7 +575,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li><code>id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
+<li><code>child_id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
+<li><code>response_id</code>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</li>
 <li><code>time</code>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</li>
 <li><code>time_stamp</code>: date at which the response to the questionnaire was recorded (last item responded)</li>
 <li><code>list</code>: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant</li>
@@ -556,38 +590,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
 <p>This data frame is the one used to fit the main model, and the model included in Appendix A. It contains participants’ responses to each item included in the sub-list of the questionnaire they responded to, together with participant- and word-level predictors of interest.</p>
 <div class="cell">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>responses <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<table class="table table-sm table-striped small">
+<table class="caption-top table table-sm table-striped small">
 <colgroup>
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 3%">
 <col style="width: 5%">
-<col style="width: 2%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 5%">
-<col style="width: 13%">
-<col style="width: 3%">
-<col style="width: 4%">
-<col style="width: 3%">
-<col style="width: 5%">
-<col style="width: 4%">
 <col style="width: 7%">
 <col style="width: 2%">
+<col style="width: 3%">
+<col style="width: 4%">
+<col style="width: 2%">
 <col style="width: 5%">
+<col style="width: 4%">
+<col style="width: 4%">
+<col style="width: 12%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 2%">
 <col style="width: 5%">
-<col style="width: 8%">
+<col style="width: 4%">
+<col style="width: 6%">
+<col style="width: 2%">
+<col style="width: 4%">
+<col style="width: 5%">
+<col style="width: 7%">
 </colgroup>
 <thead>
 <tr class="header">
-<th style="text-align: left;">id</th>
+<th style="text-align: left;">child_id</th>
+<th style="text-align: left;">response_id</th>
 <th style="text-align: right;">time</th>
 <th style="text-align: right;">age</th>
 <th style="text-align: right;">age_std</th>
@@ -611,20 +647,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">115</td>
 <td style="text-align: left;">Catalan</td>
 <td style="text-align: left;">witch</td>
 <td style="text-align: left;">bruixa</td>
 <td style="text-align: left;">Understands and Says</td>
 <td style="text-align: right;">0.60</td>
-<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.98</td>
 <td style="text-align: right;">6.23</td>
 <td style="text-align: right;">1.10</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">1.36</td>
 <td style="text-align: right;">5.61</td>
@@ -632,20 +669,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">115</td>
 <td style="text-align: left;">Spanish</td>
 <td style="text-align: left;">witch</td>
 <td style="text-align: left;">bruja</td>
 <td style="text-align: left;">Understands</td>
 <td style="text-align: right;">0.60</td>
-<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.98</td>
 <td style="text-align: right;">6.23</td>
 <td style="text-align: right;">1.10</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">-1.31</td>
 <td style="text-align: right;">0.62</td>
@@ -653,20 +691,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">148</td>
 <td style="text-align: left;">Catalan</td>
 <td style="text-align: left;">bee</td>
 <td style="text-align: left;">abella</td>
 <td style="text-align: left;">Understands and Says</td>
 <td style="text-align: right;">0.20</td>
-<td style="text-align: right;">-0.59</td>
+<td style="text-align: right;">-0.58</td>
 <td style="text-align: right;">6.09</td>
 <td style="text-align: right;">0.31</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">1.36</td>
 <td style="text-align: right;">5.48</td>
@@ -674,20 +713,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">148</td>
 <td style="text-align: left;">Spanish</td>
 <td style="text-align: left;">bee</td>
 <td style="text-align: left;">abeja</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: right;">0.20</td>
-<td style="text-align: right;">-0.59</td>
+<td style="text-align: right;">-0.58</td>
 <td style="text-align: right;">6.09</td>
 <td style="text-align: right;">0.31</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">-1.31</td>
 <td style="text-align: right;">0.61</td>
@@ -695,20 +735,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">153</td>
 <td style="text-align: left;">Catalan</td>
 <td style="text-align: left;">owl</td>
 <td style="text-align: left;">mussol</td>
 <td style="text-align: left;">Understands and Says</td>
 <td style="text-align: right;">0.20</td>
-<td style="text-align: right;">-0.59</td>
+<td style="text-align: right;">-0.58</td>
 <td style="text-align: right;">5.95</td>
 <td style="text-align: right;">-0.45</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">1.36</td>
 <td style="text-align: right;">5.35</td>
@@ -716,20 +757,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">153</td>
 <td style="text-align: left;">Spanish</td>
 <td style="text-align: left;">owl</td>
 <td style="text-align: left;">buho</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: right;">0.20</td>
-<td style="text-align: right;">-0.59</td>
+<td style="text-align: right;">-0.58</td>
 <td style="text-align: right;">5.95</td>
 <td style="text-align: right;">-0.45</td>
 <td style="text-align: right;">3</td>
-<td style="text-align: right;">-1.50</td>
+<td style="text-align: right;">-1.49</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">-1.31</td>
 <td style="text-align: right;">0.59</td>
@@ -737,41 +779,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">159</td>
 <td style="text-align: left;">Catalan</td>
 <td style="text-align: left;">snail</td>
 <td style="text-align: left;">cargol</td>
 <td style="text-align: left;">Understands and Says</td>
 <td style="text-align: right;">0.29</td>
-<td style="text-align: right;">-0.26</td>
+<td style="text-align: right;">-0.25</td>
 <td style="text-align: right;">5.84</td>
-<td style="text-align: right;">-1.02</td>
+<td style="text-align: right;">-1.03</td>
 <td style="text-align: right;">6</td>
-<td style="text-align: right;">0.42</td>
+<td style="text-align: right;">0.43</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">1.36</td>
 <td style="text-align: right;">5.25</td>
-<td style="text-align: right;">1.27</td>
+<td style="text-align: right;">1.26</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">159</td>
 <td style="text-align: left;">Spanish</td>
 <td style="text-align: left;">snail</td>
 <td style="text-align: left;">caracol</td>
 <td style="text-align: left;">Understands</td>
 <td style="text-align: right;">0.29</td>
-<td style="text-align: right;">-0.26</td>
+<td style="text-align: right;">-0.25</td>
 <td style="text-align: right;">5.84</td>
-<td style="text-align: right;">-1.02</td>
+<td style="text-align: right;">-1.03</td>
 <td style="text-align: right;">7</td>
-<td style="text-align: right;">1.06</td>
+<td style="text-align: right;">1.07</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">-1.31</td>
 <td style="text-align: right;">0.58</td>
@@ -779,20 +823,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="odd">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">160</td>
 <td style="text-align: left;">Catalan</td>
 <td style="text-align: left;">zebra</td>
 <td style="text-align: left;">zebra</td>
 <td style="text-align: left;">Understands</td>
 <td style="text-align: right;">0.60</td>
-<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.98</td>
 <td style="text-align: right;">6.13</td>
-<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">0.54</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.9</td>
 <td style="text-align: right;">1.36</td>
 <td style="text-align: right;">5.52</td>
@@ -800,20 +845,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 <tr class="even">
 <td style="text-align: left;">54531</td>
+<td style="text-align: left;">872</td>
 <td style="text-align: right;">1</td>
 <td style="text-align: right;">31.64</td>
-<td style="text-align: right;">1.94</td>
+<td style="text-align: right;">1.96</td>
 <td style="text-align: right;">160</td>
 <td style="text-align: left;">Spanish</td>
 <td style="text-align: left;">zebra</td>
 <td style="text-align: left;">cebra</td>
 <td style="text-align: left;">No</td>
 <td style="text-align: right;">0.60</td>
-<td style="text-align: right;">0.97</td>
+<td style="text-align: right;">0.98</td>
 <td style="text-align: right;">6.13</td>
-<td style="text-align: right;">0.55</td>
+<td style="text-align: right;">0.54</td>
 <td style="text-align: right;">5</td>
-<td style="text-align: right;">-0.22</td>
+<td style="text-align: right;">-0.21</td>
 <td style="text-align: right;">0.1</td>
 <td style="text-align: right;">-1.31</td>
 <td style="text-align: right;">0.61</td>
@@ -824,8 +870,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li><code>id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
-<li><code>time</code>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</li>
+<li><code>child_id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
+<li><code>response_id</code>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</li>
 <li><code>age</code>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</li>
 <li><code>age_std</code>: numeric value indicating the participant’s standardised <code>age</code></li>
 <li><code>te</code>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</li>
@@ -888,18 +934,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -931,7 +966,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -983,10 +1040,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/gongcastro\.github\.io\/cognate-beginnings\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -996,8 +1070,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1009,7 +1092,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1053,6 +1259,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1078,6 +1285,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1142,31 +1375,31 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># load objects -----------------------------------------------------------------</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_config_set</span>(</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">store =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets"</span>),</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">script =</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"_targets.R"</span>)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="in">#| label: setup</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="in">#| message: false</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="in">#| warning: false</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects -----------------------------------------------------------------</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="in">targets::tar_config_set(</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="in">  store = here::here("_targets"),</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">  script = here::here("_targets.R")</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>yaml_metadata <span class="ot">&lt;-</span> rmarkdown<span class="sc">::</span><span class="fu">yaml_front_matter</span>(</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>    here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"manuscript"</span>, <span class="st">"manuscript.qmd"</span>)</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="in">yaml_metadata &lt;- rmarkdown::yaml_front_matter(</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">  here::here("manuscript", "manuscript.qmd")</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>title <span class="ot">&lt;-</span> yaml_metadata<span class="sc">$</span>title</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>abstract <span class="ot">&lt;-</span> yaml_metadata<span class="sc">$</span>abstract</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>thanks <span class="ot">&lt;-</span> yaml_metadata<span class="sc">$</span>thanks</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="in">title &lt;- yaml_metadata$title</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="in">abstract &lt;- yaml_metadata$abstract</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="in">thanks &lt;- yaml_metadata$thanks</span></span>
 <span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_load</span>(items)</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_load</span>(participants)</span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_load</span>(responses)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a><span class="in">targets::tar_load(items)</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">targets::tar_load(participants)</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">targets::tar_load(responses)</span></span>
 <span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="in">library(dplyr)</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="in">library(tidyr)</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="in">library(knitr)</span></span>
 <span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
@@ -1178,9 +1411,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r items}</span></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>items <span class="sc">|&gt;</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">items |&gt;</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10) |&gt;</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(digits = 2)</span></span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`te`</span>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
@@ -1204,52 +1437,53 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r participants}</span></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">participants |&gt;</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10) |&gt;</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(digits = 2)</span></span>
 <span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time`</span>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time_stamp`</span>: date at which the response to the questionnaire was recorded (last item responded)</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`list`</span>: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lp`</span>: character string indicating the language profile of the participant (Monolingual or Bilingual), calculated from <span class="in">`doe_catalan`</span> and <span class="in">`doe_spanish`</span> (<span class="in">`"Monolingual"`</span> if &gt;=80% DoE to Catalan or Spanish, <span class="in">`"Bilingual"`</span> otherwise)</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_catalan`</span>: numeric value indicating participant's degree of exposure (DoE) to Catalan, as reported by their caregivers</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_spanish`</span>: numeric value indicating participant's degree of exposure (DoE) to Spanish, as reported by their caregivers</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`edu_parent`</span>: factor indicating the caregivers maximum educational attainment</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Responses</span></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>This data frame is the one used to fit the main model, and the model included in Appendix A. It contains participants' responses to each item included in the sub-list of the questionnaire they responded to, together with participant- and word-level predictors of interest. </span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r responses}</span></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>responses <span class="sc">|&gt;</span></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time`</span>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age_std`</span>: numeric value indicating the participant's standardised <span class="in">`age`</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`te`</span>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`language`</span>: character string indicating the language (Catalan or Spanish) to which the word-form belongs to </span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`meaning`</span>: character string that uniquely labels the concept associated to the word-form, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`item`</span>: character string that uniquely identifies the word-form in the questionnaire, and links it to the formr item</span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response`</span>: ordered factor indicating participant's response to the item, which can take <span class="in">`"No"`</span>, <span class="in">`"Understands"`</span>, or <span class="in">`"Understands and Says"`</span> as values</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv`</span>: numeric value indicating the normalised inverse of the Levenshtein distance between the X-SAMPA phonological transcriptions of the word-form and of its translation equivalent, calculated using the <span class="in">`stringdist::stringsim()`</span> (see the Methods section in the main manuscript for more details)</span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv_std`</span>: numeric value indicating the word-form's standardised <span class="in">`lv`</span></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq`</span>: numeric values indicating the lexical frequency in Zipf scores, from the English CHILDES corpora</span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq_std`</span>: numeric value indicating the word-form's standardised <span class="in">`freq`</span></span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon`</span>: integer indicating the number of phonemes included in the X-SAMPA phonological transcription of the word-form</span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon_std`</span>: numeric value indicating the word-form's standardised <span class="in">`n_phon`</span></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe`</span>: numeric value indicating participant's degree of exposure (DoE) to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`doe`</span> to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`exposure`</span>: numeric value indicating the participants' exposure score to the word-form, calculated as the product of <span class="in">`freq`</span> and <span class="in">`doe`</span></span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`exposure`</span> score for the <span class="in">`item`</span> and its <span class="in">`freq`</span> (see the Methods section in the main Manuscript for more details)</span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`child_id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response_id`</span>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time`</span>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time_stamp`</span>: date at which the response to the questionnaire was recorded (last item responded)</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`list`</span>: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lp`</span>: character string indicating the language profile of the participant (Monolingual or Bilingual), calculated from <span class="in">`doe_catalan`</span> and <span class="in">`doe_spanish`</span> (<span class="in">`"Monolingual"`</span> if &gt;=80% DoE to Catalan or Spanish, <span class="in">`"Bilingual"`</span> otherwise)</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_catalan`</span>: numeric value indicating participant's degree of exposure (DoE) to Catalan, as reported by their caregivers</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_spanish`</span>: numeric value indicating participant's degree of exposure (DoE) to Spanish, as reported by their caregivers</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`edu_parent`</span>: factor indicating the caregivers maximum educational attainment</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Responses</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>This data frame is the one used to fit the main model, and the model included in Appendix A. It contains participants' responses to each item included in the sub-list of the questionnaire they responded to, together with participant- and word-level predictors of interest. </span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r responses}</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="in">responses |&gt;</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10) |&gt;</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(digits = 2)</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`child_id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response_id`</span>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age_std`</span>: numeric value indicating the participant's standardised <span class="in">`age`</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`te`</span>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`language`</span>: character string indicating the language (Catalan or Spanish) to which the word-form belongs to </span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`meaning`</span>: character string that uniquely labels the concept associated to the word-form, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`item`</span>: character string that uniquely identifies the word-form in the questionnaire, and links it to the formr item</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response`</span>: ordered factor indicating participant's response to the item, which can take <span class="in">`"No"`</span>, <span class="in">`"Understands"`</span>, or <span class="in">`"Understands and Says"`</span> as values</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv`</span>: numeric value indicating the normalised inverse of the Levenshtein distance between the X-SAMPA phonological transcriptions of the word-form and of its translation equivalent, calculated using the <span class="in">`stringdist::stringsim()`</span> (see the Methods section in the main manuscript for more details)</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv_std`</span>: numeric value indicating the word-form's standardised <span class="in">`lv`</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq`</span>: numeric values indicating the lexical frequency in Zipf scores, from the English CHILDES corpora</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq_std`</span>: numeric value indicating the word-form's standardised <span class="in">`freq`</span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon`</span>: integer indicating the number of phonemes included in the X-SAMPA phonological transcription of the word-form</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon_std`</span>: numeric value indicating the word-form's standardised <span class="in">`n_phon`</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe`</span>: numeric value indicating participant's degree of exposure (DoE) to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`doe`</span> to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`exposure`</span>: numeric value indicating the participants' exposure score to the word-form, calculated as the product of <span class="in">`freq`</span> and <span class="in">`doe`</span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`exposure`</span> score for the <span class="in">`item`</span> and its <span class="in">`freq`</span> (see the Methods section in the main Manuscript for more details)</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
@@ -1259,10 +1493,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/gongcastro/cognate-beginnings/edit/main/docs/_data-dictionary.qmd" class="toc-action">Edit this page</a></p><p><a href="https://github.com/gongcastro/cognate-beginnings/issues/new" class="toc-action">Report an issue</a></p></div></div></div>
-    <div class="nav-footer-right">Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/gongcastro/cognate-beginnings">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></div>
+    <div class="toc-actions"><ul><li><a href="https://github.com/gongcastro/cognate-beginnings/edit/main/docs/_data-dictionary.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li><li><a href="https://github.com/gongcastro/cognate-beginnings/issues/new" class="toc-action"><i class="bi empty"></i>Report an issue</a></li></ul></div></div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-label="r-project"></i> and <a href="https://quarto.org/">Quarto</a><br> <a href="https://github.com/gongcastro/cognate-beginnings">View the source at <i class="fa-brands fa-github" aria-label="github"></i> GitHub</a></p>
+</div>
   </div>
 </footer>
+
 
 
 

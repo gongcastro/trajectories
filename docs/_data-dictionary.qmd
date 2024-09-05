@@ -9,12 +9,12 @@ title: Data dictionary
 #| echo: false
 # load objects -----------------------------------------------------------------
 targets::tar_config_set(
-    store = here::here("_targets"),
-    script = here::here("_targets.R")
+  store = here::here("_targets"),
+  script = here::here("_targets.R")
 )
 
 yaml_metadata <- rmarkdown::yaml_front_matter(
-    here::here("manuscript", "manuscript.qmd")
+  here::here("manuscript", "manuscript.qmd")
 )
 
 title <- yaml_metadata$title
@@ -40,8 +40,8 @@ This data frame contains information about the word-forms included in the questi
 
 ```{r items}
 items |>
-    head(10) |>
-    knitr::kable(digits = 2)
+  head(10) |>
+  knitr::kable(digits = 2)
 ```
 
 * `te`: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent
@@ -66,11 +66,12 @@ This data frame contains demographic and linguistic information about participan
 
 ```{r participants}
 participants |>
-    head(10) |>
-    knitr::kable(digits = 2)
+  head(10) |>
+  knitr::kable(digits = 2)
 ```
 
-* `id`: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant
+* `child_id`: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant
+* `response_id`: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants
 * `time`: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire
 * `time_stamp`: date at which the response to the questionnaire was recorded (last item responded)
 * `list`: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant
@@ -86,12 +87,12 @@ This data frame is the one used to fit the main model, and the model included in
 
 ```{r responses}
 responses |>
-    head(10) |>
-    knitr::kable(digits = 2)
+  head(10) |>
+  knitr::kable(digits = 2)
 ```
 
-* `id`: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant
-* `time`: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire
+* `child_id`: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant
+* `response_id`: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants
 * `age`: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant
 * `age_std`: numeric value indicating the participant's standardised `age`
 * `te`: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent

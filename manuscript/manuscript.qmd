@@ -75,13 +75,13 @@ We propose an account in which a learning instance for a word may also represent
 
 Consider the example of the Catalan-Spanish cognate translation equivalent /ˈgat/--/ˈga.to/ [*cat*], which are phonologically very similar. When the child listens to /ˈgat/, they will strongly co-activate /ˈga.to/ in parallel. If the child has already formed a form-meaning association for both word-forms, parallel activation may result from the activation of their common concept or from activation spreading throughout phonological similarity. We assume semantic co-activation to be constant across cognate and non-cognate translation equivalents, and focus on phonological co-activation as an additional source of activation that affects cognates more strongly than non-cognates. Therefore, this exposure will count as a learning instance for both co-activated forms. The case of the non-cognate translation equivalent /ˈgos/-/ˈpe.ro/ [*dog*] would be different. Given the low phonological similarity between both word-forms, an exposure to /ˈgos/ will result in a weak activation of /ˈpe.ro/, leading to such exposure counting as a learning instance for /ˈgos/ (which the child was exposed to), but not for /ˈpe.ro/. While /ˈgat/--/ˈga.to/ will benefit from phonological co-activation, /ˈgos/--/ˈpe.ro/ will not. If the child receives linguistic input from one of the languages more often than from the other, this effect might affect each form of the cognate translation equivalent differently. For instance, if the child receives a larger amount of Catalan input than Spanish input, they will encounter the Catalan form /ˈgat/ more frequently than the Spanish form /ˈga.to/. Through parallel activation, /ˈgat/ will activate /ˈga.to/ more often than vice versa. Ultimately, /ˈga.to/ will benefit more strongly from its cognate status than /ˈgat/, as it receives additional learning instances from its translation equivalent more often than /ˈgat/.
 
-To test these predictions, we created a vocabulary questionnaire and collected vocabulary data on production and comprehension from a large sample of bilingual children living in [CITY NAME REDACTED FOR BLINDING] (Catalonia, Spain), and who were learning to Catalan and Spanish. Catalan and Spanish are two Romance languages that co-exist in Catalonia in a co-official status. Both languages are used in fairly similar contexts, and both are known by the majority of the population. In 2018, more than 81.2% of a representative sample of 8,780 adults aged 15 years or older living in Catalonia reported being able to speak Catalan, and more than 99.5% of the same population reported being able to speak Spanish [@2018els]. Together with the fact that Catalan and Spanish share a considerable amount of cognates, this makes Catalan-Spanish bilingual children an ideal population in which to investigate the role of cognateness of vocabulary acquisition.
+To test these predictions, we created a vocabulary questionnaire and collected vocabulary data on production and comprehension from a large sample of bilingual children living in the Metropolitan Area of Barcelona (Catalonia, Spain), and who were learning to Catalan and Spanish. Catalan and Spanish are two Romance languages that co-exist in Catalonia in a co-official status. Both languages are used in fairly similar contexts, and both are known by the majority of the population. In 2018, more than 81.2% of a representative sample of 8,780 adults aged 15 years or older living in Catalonia reported being able to speak Catalan, and more than 99.5% of the same population reported being able to speak Spanish [@2018els]. Together with the fact that Catalan and Spanish share a considerable amount of cognates, this makes Catalan-Spanish bilingual children an ideal population in which to investigate the role of cognateness of vocabulary acquisition.
 
 We adopted a Bayesian explanatory item response theory approach to model the probability of acquisition of `r nrow(distinct(items, language, item))` Catalan and Spanish nouns included in the vocabulary checklist. Words were considered as acquired if caregivers reported such word to be understood (comprehension) or understood and said (production) by their child. We estimated the impact of several predictors of interest on the probability of acquisition, including participants' age, participants' degree of exposure to each language, and the cognate status of the word-forms. We also adjusted the estimated effects for other two known to contribute to word acquisition, which we modelled as covariates: word-form length and lexical frequency. We predicted an interaction between the cognate status of word-forms and participants' degree of exposure to the language each word-form belongs to. We anticipated this interaction to be revealed by a higher probability of acquisition of cognate words in the lower-exposure language, but not of cognate words in the higher-exposure language. 
 
 # Methods {#sec-methods}
 
-Data and materials for this research are available on the Open Science Framework (https://osf.io/hy984/?view_only=50038c88af2a4b7ab37563078f8952f4 [TEMPORARY LINK TO ANONIMISED OSF FOLDER]), and code is available on GitHub (https://anonymous.4open.science/r/cognate-beginnings-anonymous/README.md [TEMPORARY LINK TO ANONIMISED OSF REPOSITORY]). For reproducibility, a Docker image of the RStudio session is available on DockerHub ([LINK REDACTED FOR BLIND REVIEW]).
+Data and materials for this research are available on the Open Science Framework (https://osf.io/hy984/), and code is available on GitHub (https://github.com/gongcastro/cognate-beginnings). For reproducibility, a Docker image of the RStudio session is available on DockerHub (https://hub.docker.com/repository/docker/gongcastro/cognate-beginnings/general).
 
 
 ## Participants {#sec-participants}
@@ -94,27 +94,27 @@ Data and materials for this research are available on the Open Science Framework
 #| include: false
 # load packages
 n_participants <- responses |>
-  distinct(id, age) |>
-  count(id) |>
+  distinct(child_id, age) |>
+  count(child_id) |>
   pull(n) |>
   table()
 
 suppressWarnings({
   diff_responses <- responses |>
-    distinct(id, age) |>
-    left_join(distinct(participants, id, time_stamp, age),
-      by = c("id", "age")
+    distinct(child_id, age) |>
+    left_join(distinct(participants, child_id, time_stamp, age),
+      by = c("child_id", "age")
     ) |>
     group_by() |>
-    arrange(id, time_stamp) |>
+    arrange(child_id, time_stamp) |>
     mutate(
       diff_lag = time_stamp - dplyr::lag(time_stamp, default = NA),
-      .by = id
+      .by = child_id
     ) |>
     summarise(
       diff_min = min(diff_lag, na.rm = TRUE),
       diff_max = max(diff_lag, na.rm = TRUE),
-      .by = id
+      .by = child_id
     ) |>
     dplyr::filter(!(diff_min %in% c(-Inf, Inf))) |>
     summarise(
@@ -123,7 +123,7 @@ suppressWarnings({
     )
 })
 
-n_responses <- nrow(distinct(responses, id, age))
+n_responses <- nrow(distinct(responses, response_id, age))
 
 dates <- as.Date(range(participants$time_stamp, na.rm = TRUE))
 
@@ -144,14 +144,14 @@ participants_age <- summarise(
   across(age, lst(mean, median, sd, min, max))
 )
 
-participants_sex <- c(table(distinct(participants, id, sex)$sex),
-  missing = sum(is.na(distinct(participants, id, sex)$sex))
+participants_sex <- c(table(distinct(participants, child_id, sex)$sex),
+  missing = sum(is.na(distinct(participants, child_id, sex)$sex))
 )
 ```
 
 We collected `r n_responses` responses to the vocabulary questionnaire, corresponding to `r sum(n_participants)` distinct children (`r participants_sex[["female"]]` female, `r participants_sex[["male"]]` male, `r participants_sex[["missing"]]` not reported, mainly White). Participants were aged 12-32 months (*M* = `r round(participants_age$age_mean, 2)`, *SD* = `r round(participants_age$age_sd, 2)`, *Range* = `r round(participants_age$age_min, 2)`-`r round(participants_age$age_max, 2)`). Of those participants, `r english::words(n_participants[4])` participated four times, `r english::words(n_participants[3])` participated three times, `r n_participants[2]` participated twice, and `r n_participants[1]` participated once. Recurrent participants provided responses with a minimum of `r as.numeric(diff_responses$diff_min)` days between responses, and a maximum of `r as.numeric(diff_responses$diff_max)` days.
 
-Participants were residents in [CITY NAME REDACTED FOR BLIND REVIEW] (Catalonia, Spain). Data collection took place between March 30th, 2020 and October 31th, 2022. Participants were part of the database of the [LABORATORY NAME REDACTED FOR BLIND REVIEW] and were contacted by e-mail or phone if their child was aged between `r floor(min(responses$age))` and `r ceiling(max(responses$age))` months. Upon consent, families were sent a link to the questionnaire via e-mail, which they filled from a computer, laptop, or mobile device. Filling the questionnaire took 30 minutes approximately. After completion, families were rewarded with a token of appreciation. Before filling out the vocabulary questionnaire, parents completed a brief demographic survey and a language exposure questionnaire. The demographic survey collection information about the childs' sex and caregivers' educational attainments.
+Participants were residents in the Metropolitan Area of Barcelona (Catalonia, Spain). Data collection took place between March 30th, 2020 and October 31th, 2022. Participants were part of the database of the Laboratori de Recerca en Infància from Universitat Pompeu Fabra and were contacted by e-mail or phone if their child was aged between `r floor(min(responses$age))` and `r ceiling(max(responses$age))` months. Upon consent, families were sent a link to the questionnaire via e-mail, which they filled from a computer, laptop, or mobile device. Filling the questionnaire took 30 minutes approximately. After completion, families were rewarded with a token of appreciation. Before filling out the vocabulary questionnaire, parents completed a brief demographic survey and a language exposure questionnaire. The demographic survey collection information about the childs' sex and caregivers' educational attainments.
 
 We used the highest self-reported educational attainment of parents or caregivers as a proxy of participants' socio-economic status (SES). This information was provided by each parent or caregiver by selecting one of six possible alternatives in line with the current educational system in Spain: *sense escolaritzar/sin escolarizar* [no education], *educació primària/educación primaria* [primary school], *educació secundària/educación secundaria* [secondary school], *batxillerat/bachillerato* [complementary studies/high school], *cicles formatius/ciclos formativos* [vocational training], and *educació universitària/educación universitaria* [university degree]. Most families reported university studies (`r participants_edu["University"]`, `r scales::percent(participants_edu["University"]/sum(participants_edu))`), followed by families where the highest educational attainment were vocational studies (`r table(participants$edu_parent)["Vocational"]`, `r scales::percent(participants_edu["Vocational"]/sum(participants_edu))`), secondary education (`r participants_edu["Secondary"]`, `r scales::percent(participants_edu["Secondary"]/sum(participants_edu))`), complementary studies (`r participants_edu["Complementary"]`,  `r scales::percent(participants_edu["Complementary"]/sum(participants_edu))`), primary education (`r participants_edu["Primary"]`, <1%), and no formal education (`r participants_edu["No education"]`, <1%).
 

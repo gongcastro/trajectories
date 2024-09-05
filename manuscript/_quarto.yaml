@@ -1,6 +1,18 @@
 format:
   docx:
     reference-doc: _assets/template.docx
+  arxiv-pdf:
+    keep-tex: true  
+    linenumbers: true
+    doublespacing: false
+    runninghead: "Cognate beginnings to bilingual lexical acquistion"
+    include-in-header: 
+      text: |
+        \usepackage{tipa}
+        \usepackage{booktabs}
+    knitr:
+      opts_chunk:
+        dev: "cairo_pdf"
 crossref:
   custom:
     - key: sfig
