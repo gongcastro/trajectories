@@ -1,1 +1,1 @@
-Sitemap: https://github.com/gongcastro/cognate-beginnings/sitemap.xml
+Sitemap: https://gongcastro.github.io/cognate-beginnings/sitemap.xml
