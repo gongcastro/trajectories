@@ -192,8 +192,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>items <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -406,8 +406,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -575,7 +575,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li><code>id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
+<li><code>child_id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
+<li><code>response_id</code>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</li>
 <li><code>time</code>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</li>
 <li><code>time_stamp</code>: date at which the response to the questionnaire was recorded (last item responded)</li>
 <li><code>list</code>: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant</li>
@@ -592,8 +593,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>responses <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -869,8 +870,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <ul>
-<li><code>id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
-<li><code>time</code>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</li>
+<li><code>child_id</code>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</li>
+<li><code>response_id</code>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</li>
 <li><code>age</code>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</li>
 <li><code>age_std</code>: numeric value indicating the participant’s standardised <code>age</code></li>
 <li><code>te</code>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</li>
@@ -1380,12 +1381,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="in">#| echo: false</span></span>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="in"># load objects -----------------------------------------------------------------</span></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="in">targets::tar_config_set(</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="in">    store = here::here("_targets"),</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">    script = here::here("_targets.R")</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="in">  store = here::here("_targets"),</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="in">  script = here::here("_targets.R")</span></span>
 <span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="in">yaml_metadata &lt;- rmarkdown::yaml_front_matter(</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">    here::here("manuscript", "manuscript.qmd")</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="in">  here::here("manuscript", "manuscript.qmd")</span></span>
 <span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a><span class="in">)</span></span>
 <span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="in">title &lt;- yaml_metadata$title</span></span>
@@ -1411,8 +1412,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r items}</span></span>
 <span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="in">items |&gt;</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">    head(10) |&gt;</span></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">    knitr::kable(digits = 2)</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10) |&gt;</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(digits = 2)</span></span>
 <span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`te`</span>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
@@ -1437,51 +1438,52 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r participants}</span></span>
 <span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="in">participants |&gt;</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">    head(10) |&gt;</span></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">    knitr::kable(digits = 2)</span></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10) |&gt;</span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(digits = 2)</span></span>
 <span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time`</span>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time_stamp`</span>: date at which the response to the questionnaire was recorded (last item responded)</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`list`</span>: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lp`</span>: character string indicating the language profile of the participant (Monolingual or Bilingual), calculated from <span class="in">`doe_catalan`</span> and <span class="in">`doe_spanish`</span> (<span class="in">`"Monolingual"`</span> if &gt;=80% DoE to Catalan or Spanish, <span class="in">`"Bilingual"`</span> otherwise)</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_catalan`</span>: numeric value indicating participant's degree of exposure (DoE) to Catalan, as reported by their caregivers</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_spanish`</span>: numeric value indicating participant's degree of exposure (DoE) to Spanish, as reported by their caregivers</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`edu_parent`</span>: factor indicating the caregivers maximum educational attainment</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a><span class="fu">## Responses</span></span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>This data frame is the one used to fit the main model, and the model included in Appendix A. It contains participants' responses to each item included in the sub-list of the questionnaire they responded to, together with participant- and word-level predictors of interest. </span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a><span class="in">```{r responses}</span></span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">responses |&gt;</span></span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="in">    head(10) |&gt;</span></span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="in">    knitr::kable(digits = 2)</span></span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time`</span>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age_std`</span>: numeric value indicating the participant's standardised <span class="in">`age`</span></span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`te`</span>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`language`</span>: character string indicating the language (Catalan or Spanish) to which the word-form belongs to </span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`meaning`</span>: character string that uniquely labels the concept associated to the word-form, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`item`</span>: character string that uniquely identifies the word-form in the questionnaire, and links it to the formr item</span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response`</span>: ordered factor indicating participant's response to the item, which can take <span class="in">`"No"`</span>, <span class="in">`"Understands"`</span>, or <span class="in">`"Understands and Says"`</span> as values</span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv`</span>: numeric value indicating the normalised inverse of the Levenshtein distance between the X-SAMPA phonological transcriptions of the word-form and of its translation equivalent, calculated using the <span class="in">`stringdist::stringsim()`</span> (see the Methods section in the main manuscript for more details)</span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv_std`</span>: numeric value indicating the word-form's standardised <span class="in">`lv`</span></span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq`</span>: numeric values indicating the lexical frequency in Zipf scores, from the English CHILDES corpora</span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq_std`</span>: numeric value indicating the word-form's standardised <span class="in">`freq`</span></span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon`</span>: integer indicating the number of phonemes included in the X-SAMPA phonological transcription of the word-form</span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon_std`</span>: numeric value indicating the word-form's standardised <span class="in">`n_phon`</span></span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe`</span>: numeric value indicating participant's degree of exposure (DoE) to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`doe`</span> to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`exposure`</span>: numeric value indicating the participants' exposure score to the word-form, calculated as the product of <span class="in">`freq`</span> and <span class="in">`doe`</span></span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`exposure`</span> score for the <span class="in">`item`</span> and its <span class="in">`freq`</span> (see the Methods section in the main Manuscript for more details)</span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`child_id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response_id`</span>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time`</span>: integer indicating the cumulative number of times the participant has provided a valid response to the questionnaire</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`time_stamp`</span>: date at which the response to the questionnaire was recorded (last item responded)</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`list`</span>: character string indicating the questionnaire sub-list to which the participant responded, which is virtually always the same for the same participant</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lp`</span>: character string indicating the language profile of the participant (Monolingual or Bilingual), calculated from <span class="in">`doe_catalan`</span> and <span class="in">`doe_spanish`</span> (<span class="in">`"Monolingual"`</span> if &gt;=80% DoE to Catalan or Spanish, <span class="in">`"Bilingual"`</span> otherwise)</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_catalan`</span>: numeric value indicating participant's degree of exposure (DoE) to Catalan, as reported by their caregivers</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_spanish`</span>: numeric value indicating participant's degree of exposure (DoE) to Spanish, as reported by their caregivers</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`edu_parent`</span>: factor indicating the caregivers maximum educational attainment</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Responses</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>This data frame is the one used to fit the main model, and the model included in Appendix A. It contains participants' responses to each item included in the sub-list of the questionnaire they responded to, together with participant- and word-level predictors of interest. </span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="in">```{r responses}</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a><span class="in">responses |&gt;</span></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="in">  head(10) |&gt;</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a><span class="in">  knitr::kable(digits = 2)</span></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`child_id`</span>: integer that uniquely labels participant, and is only repeated across responses to the questionnaire from the same participant</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response_id`</span>: integer that uniquely labels questionnaire administrations, and is never repeated across questionnaire administrations or participants</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age`</span>: numeric value indicating the age of the participant when their response to the questionnaire was recorded, calculated as the difference in months between such date and the birth date of the participant</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`age_std`</span>: numeric value indicating the participant's standardised <span class="in">`age`</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`te`</span>: integer that uniquely labels a translation equivalent, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`language`</span>: character string indicating the language (Catalan or Spanish) to which the word-form belongs to </span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`meaning`</span>: character string that uniquely labels the concept associated to the word-form, and is only repeated across the word-forms from Catalan and Spanish that are part of the same translation equivalent</span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`item`</span>: character string that uniquely identifies the word-form in the questionnaire, and links it to the formr item</span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`response`</span>: ordered factor indicating participant's response to the item, which can take <span class="in">`"No"`</span>, <span class="in">`"Understands"`</span>, or <span class="in">`"Understands and Says"`</span> as values</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv`</span>: numeric value indicating the normalised inverse of the Levenshtein distance between the X-SAMPA phonological transcriptions of the word-form and of its translation equivalent, calculated using the <span class="in">`stringdist::stringsim()`</span> (see the Methods section in the main manuscript for more details)</span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`lv_std`</span>: numeric value indicating the word-form's standardised <span class="in">`lv`</span></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq`</span>: numeric values indicating the lexical frequency in Zipf scores, from the English CHILDES corpora</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`freq_std`</span>: numeric value indicating the word-form's standardised <span class="in">`freq`</span></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon`</span>: integer indicating the number of phonemes included in the X-SAMPA phonological transcription of the word-form</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`n_phon_std`</span>: numeric value indicating the word-form's standardised <span class="in">`n_phon`</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe`</span>: numeric value indicating participant's degree of exposure (DoE) to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`doe`</span> to the <span class="in">`language`</span> the <span class="in">`item`</span> belongs to</span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`exposure`</span>: numeric value indicating the participants' exposure score to the word-form, calculated as the product of <span class="in">`freq`</span> and <span class="in">`doe`</span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="in">`doe_std`</span>: numeric value indicating the participant's standardised <span class="in">`exposure`</span> score for the <span class="in">`item`</span> and its <span class="in">`freq`</span> (see the Methods section in the main Manuscript for more details)</span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
