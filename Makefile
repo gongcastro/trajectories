@@ -5,6 +5,10 @@ targets: _targets.R src/helpers.R
 	@Rscript -e "targets::tar_make()"
 	@echo Cleaning repository...
 	@Rscript -e "source('src/helpers.R'); clean_repo()"
+	@echo Rendering manuscript...
+	@quarto render manuscript/manuscript.qmd
+	@echo Rendering appendix...
+	@quarto render manuscript/appendix.qmd
 	@echo Rendering website...
 	@quarto publish gh-pages
 
@@ -16,7 +20,7 @@ docker-build: Dockerfile .dockerignore
 	@docker build -t cognate-beginnings .
 	@echo "Pushing image to Dockerhub"
 	@docker tag cognate-beginnings gongcastro/cognate-beginnings:latest
-	@docker push cognate-beginnings:latest
+	@docker push gongcastro/cognate-beginnings:latest
 
 docker-actions: Dockerfile .dockerignore
 	@echo "Pushing Dockerfile to GitHub Actions..."
@@ -32,5 +36,5 @@ docker-run:
 		-e ROOT=true \
 		-e PASSWORD=rstudio \
  		-p 8787:8787 \
-		--name rstudio cognate-beginnings:latest
+		--name rstudio gongcastro/cognate-beginnings:latest
 	
